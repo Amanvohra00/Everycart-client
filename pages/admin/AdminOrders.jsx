@@ -29,7 +29,7 @@ const AdminOrders = () => {
     const updateStatus = async (orderId, status) => {
         try {
             const { data } = await axios.put(
-                "/api/v1/order/update-status",
+                `${import.meta.env.VITE_API_URL}/order/update-status`,
                 { orderId, status }
             );
 
