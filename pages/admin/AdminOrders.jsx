@@ -11,7 +11,7 @@ const AdminOrders = () => {
     // fetch all orders
     const getAllOrders = async () => {
         try {
-            const { data } = await axios.get("/api/v1/order/all-orders");
+            const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/order/all-orders`);
 
             if (data.success) {
                 setOrders(data.orders);
