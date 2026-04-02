@@ -8,27 +8,12 @@ import { useCart } from "../components/context/Cart";
 import toast from "react-hot-toast";
 import { useAuth } from "../components/context/auth";
 
-/* --- ICONS (UNCHANGED) --- */
-const IconBag = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-);
-const IconEye = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-);
-const IconArrowRight = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-);
-const IconFilter = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
-);
-const IconTag = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-);
-const IconGrid = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+/* --- ICONS --- */
+const IconHeart = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
 );
 const IconRefresh = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '5px' }}><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
 );
 
 const Home = () => {
@@ -109,7 +94,7 @@ const Home = () => {
     setLoading(false);
     setProducts([...products, ...data.products]);
   };
-  //getsubcat
+
   const getSubCategories = async (categoryId) => {
     try {
       const { data } = await axios.get(
@@ -125,9 +110,9 @@ const Home = () => {
 
   const handleCategoryClick = (checkedValue, categoryId) => {
     setChecked(checkedValue ? [categoryId] : []);
-    setSubChecked([]);                 // reset subcategory
-    setActiveCategory(categoryId);     // track parent
-    getSubCategories(categoryId);      // load subs
+    setSubChecked([]);
+    setActiveCategory(categoryId);
+    getSubCategories(categoryId);
   };
 
   const handleSubCategoryClick = (checkedValue, subId) => {
@@ -145,380 +130,362 @@ const Home = () => {
     );
     setProducts(data.products);
   };
+
   useEffect(() => {
     if (checked.length || subChecked.length || radio.length) {
       filterProduct();
     }
   }, [checked, subChecked, radio]);
+
   return (
     <Layout title={"Best Offers"}>
       <style>
         {`
-          @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
           :root {
-            /* POP / NEO-BRUTALIST PALETTE */
-            --bg-body: #fdfbf7;      
-            --black: #000000;
-            --white: #ffffff;
-            --accent-yellow: #ffdb4d; 
-            --accent-purple: #a855f7; 
-            --accent-green: #4ade80; 
-            --accent-red: #ef4444;
+            --bg-outer: #ffffff; /* Changed to pure white for a clean look */
+            --bg-inner: #ffffff;
+            --color-dark: #222222;
+            --color-green: #0f4c3a; /* Dark green accent */
             
-            --border-thick: 2.5px solid var(--black);
-            --shadow-hard: 6px 6px 0px var(--black);
-            --shadow-hover: 3px 3px 0px var(--black);
-            --shadow-float: 10px 10px 0px var(--black);
-            
-            --font-main: 'Space Grotesk', sans-serif;
+            /* --- HERO THEME COLORS --- */
+            --hero-bg: #FFB300; /* Exact yellow from your delivery image */
+            --hero-text: #000000; /* Dark text for high contrast against the yellow */
+
+            --color-text-muted: #888888;
+            --color-border: #eaeaea;
+            --font-main: 'Poppins', sans-serif;
           }
 
           body {
-            background-color: var(--accent-yellow); 
-            background-image: radial-gradient(#000 1.5px, transparent 1.5px);
-            background-size: 24px 24px;
+            background-color: var(--bg-outer);
             font-family: var(--font-main);
-            color: var(--black);
-            overflow-x: hidden;
+            margin: 0;
           }
 
-          h1, h2, h3, h4 { text-transform: uppercase; letter-spacing: -0.5px; margin: 0; }
-
-          /* --- ANIMATIONS --- */
-          @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            80% { transform: scale(1.02); opacity: 1; }
-            100% { transform: scale(1); }
-          }
-          
-          @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+          .app-wrapper {
+            background-color: var(--bg-inner);
+            max-width: 1300px;
+            margin: 0 auto;
+            /* Removed border-radius and box-shadow so it doesn't look like a floating card */
+            padding: 30px 40px;
+            min-height: 100vh;
           }
 
-          @keyframes wiggle {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(-3deg); }
-            50% { transform: rotate(3deg); }
-            75% { transform: rotate(-1deg); }
-            100% { transform: rotate(0deg); }
-          }
-
-          /* --- CONTAINER --- */
-          .pop-container {
-            max-width: 1400px;
-            margin: 40px auto;
-            padding: 0 20px;
-          }
-
-          /* --- HERO --- */
-          .hero-pop {
-            background: var(--white);
-            border: var(--border-thick);
-            box-shadow: var(--shadow-hard);
-            padding: 60px;
-            margin-bottom: 50px;
+          /* --- HERO SECTION --- */
+          .hero-banner {
+            background-color: var(--hero-bg);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
+            padding: 50px 80px;
+            margin-bottom: 40px;
           }
-          
-          .hero-left { z-index: 2; }
-          .hero-left h1 { font-size: 4rem; font-weight: 800; line-height: 0.9; margin-bottom: 20px; text-shadow: 2px 2px 0px #fff; }
-          .hero-left p { font-size: 1.2rem; font-weight: 500; margin-bottom: 30px; max-width: 500px; background: var(--white); display: inline-block; padding: 5px; }
-          
-          .btn-pop {
-            background: var(--accent-purple);
-            color: var(--white);
-            border: var(--border-thick);
-            padding: 16px 45px;
-            font-size: 1.2rem;
+
+          .hero-content h1 {
+            color: var(--hero-text);
+            font-size: 3rem;
             font-weight: 700;
-            cursor: pointer;
-            box-shadow: var(--shadow-hard);
-            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            text-transform: uppercase;
-          }
-          .btn-pop:hover { 
-            transform: translate(-4px, -4px); 
-            box-shadow: 10px 10px 0px var(--black); 
-            background: #9333ea;
-          }
-          .btn-pop:active { 
-             transform: translate(2px, 2px); 
-             box-shadow: 2px 2px 0px var(--black); 
-          }
-
-          /* Decorative Box */
-          .hero-deco {
-            width: 250px; height: 250px;
-            background: var(--accent-green);
-            border: var(--border-thick);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 8rem; font-weight: 800;
-            transform: rotate(5deg);
-            animation: wiggle 3s infinite ease-in-out;
-            box-shadow: var(--shadow-hard);
-          }
-
-          @media (max-width: 900px) {
-            .hero-pop { flex-direction: column; text-align: center; padding: 30px; }
-            .hero-left h1 { font-size: 2.8rem; }
-            .hero-deco { margin-top: 30px; transform: rotate(0deg); width: 150px; height: 150px; font-size: 4rem; }
-          }
-
-          /* --- LAYOUT --- */
-          .main-grid {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 40px;
-            align-items: start;
-          }
-          @media (max-width: 1000px) { .main-grid { grid-template-columns: 1fr; } }
-
-          /* --- SIDEBAR --- */
-          .sidebar-box {
-            background: var(--white);
-            border: var(--border-thick);
-            box-shadow: var(--shadow-hard);
-            padding: 25px;
-            position: sticky;
-            top: 20px;
-            transition: transform 0.3s;
-          }
-          .sidebar-box:hover { box-shadow: 8px 8px 0px var(--black); transform: translate(-2px, -2px); }
-
-          .filter-title { 
-            font-weight: 800; 
-            margin-bottom: 20px; 
-            font-size: 1.1rem; 
-            border-bottom: 2px solid #000; 
-            padding-bottom: 10px; 
-            display: flex; 
-            align-items: center; 
-            gap: 10px;
-            background: #eee;
-            padding: 10px;
-            border: 2px solid black;
-          }
-
-          .ant-checkbox-wrapper, .ant-radio-wrapper {
-             font-family: var(--font-main);
-             font-weight: 600;
-             color: #000;
-             margin-bottom: 12px;
-             font-size: 1rem;
-             padding: 5px;
-             transition: 0.2s;
-             border-radius: 4px;
-          }
-          .ant-checkbox-wrapper:hover, .ant-radio-wrapper:hover {
-             background: var(--accent-yellow);
-          }
-
-          .reset-btn {
-            width: 100%;
-            background: var(--black);
-            color: white;
-            padding: 14px;
-            border: 2px solid transparent;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 20px;
-            font-family: var(--font-main);
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            transition: 0.2s;
-          }
-          .reset-btn:hover { 
-            background: var(--white); 
-            color: var(--black); 
-            border: 2px solid var(--black);
-            animation: wiggle 0.4s ease;
-          }
-
-          /* --- PRODUCTS GRID (UPDATED: MEDIUM SIZE) --- */
-          .grid-title { 
-            background: var(--black); 
-            color: var(--white); 
-            display: inline-block; 
-            padding: 12px 25px; 
-            font-size: 1.5rem; 
-            font-weight: 700;
+            line-height: 1.2;
             margin-bottom: 30px;
-            box-shadow: 6px 6px 0px rgba(255,255,255,0.8);
-            transform: rotate(-1deg);
+            margin-top: 0;
           }
 
-          .card-grid {
-            display: grid;
-            /* CHANGED: 230px is tighter/medium compared to previous 280px */
-            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); 
-            gap: 25px;
+          .btn-buy-now {
+            background-color: var(--hero-text);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            font-family: var(--font-main);
+          }
+          .btn-buy-now:hover {
+            opacity: 0.9;
           }
 
-          /* --- POP PRODUCT CARD --- */
-          .pop-card {
-            background: var(--white);
-            border: var(--border-thick);
-            padding: 15px;
-            position: relative;
-            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            display: flex;
-            flex-direction: column;
-            animation: slideUp 0.6s ease forwards;
-          }
-          .pop-card:hover {
-            box-shadow: var(--shadow-float);
-            transform: translate(-5px, -8px);
-            z-index: 10;
-            border-color: var(--accent-purple);
-          }
-
-          /* UPDATED: Image Box (No transparency grid, Medium Height) */
-          .pop-img-box {
-            height: 200px; /* Reduced from 240px for medium look */
-            border-bottom: var(--border-thick);
-            margin: -15px -15px 15px -15px; 
-            background: #ffffff; /* CLEAN BACKGROUND */
+          /* --- HERO IMAGE (Medium Size) --- */
+          .hero-image-container {
+            width: 280px; 
+            height: 280px;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            position: relative;
           }
 
-          .pop-img {
-             max-width: 80%;
-             max-height: 80%;
-             object-fit: contain;
-             mix-blend-mode: multiply;
-             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-             z-index: 1;
+          .hero-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            /* Removed mix-blend-mode so the image doesn't bend/blend weirdly */
           }
-          .pop-card:hover .pop-img { transform: scale(1.15) rotate(3deg); }
 
-          .pop-info { flex: 1; display: flex; flex-direction: column; }
-          .pop-name { font-weight: 800; font-size: 1.1rem; margin-bottom: 5px; line-height: 1.2; }
-          .pop-desc { font-size: 0.85rem; color: #555; margin-bottom: 15px; height: 38px; overflow: hidden; font-weight: 500;}
-          
-          .pop-price { 
-            font-size: 1.2rem; 
-            font-weight: 800; 
-            background: var(--accent-yellow); 
-            display: inline-block; 
-            padding: 4px 10px;
-            border: 2px solid black;
-            margin-bottom: 15px;
-            align-self: flex-start;
-            box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
-            transform: rotate(-2deg);
-            transition: 0.2s;
-          }
-          .pop-card:hover .pop-price { transform: rotate(0deg) scale(1.1); }
-
-          .pop-actions {
+          /* --- FILTERS (Horizontal layout matching pills) --- */
+          .filters-bar {
             display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+          }
+
+          .filter-pill-container {
+            display: flex;
+            align-items: center;
             gap: 10px;
+          }
+
+          .filter-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-dark);
+          }
+
+          /* Styling Ant Design Checkbox/Radio to look like pills */
+          .ant-checkbox-wrapper, .ant-radio-wrapper {
+            background: #f5f5f5;
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 0.85rem;
+            color: var(--color-dark);
+            margin: 0 !important;
+            transition: all 0.2s;
+            font-family: var(--font-main);
+          }
+          .ant-checkbox-wrapper:hover, .ant-radio-wrapper:hover {
+            background: #ebebeb;
+          }
+          .ant-checkbox-checked .ant-checkbox-inner, 
+          .ant-radio-checked .ant-radio-inner {
+            background-color: var(--color-dark) !important;
+            border-color: var(--color-dark) !important;
+          }
+
+          .btn-reset {
+            background: #fff;
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            padding: 6px 16px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            color: var(--color-dark);
+            transition: 0.2s;
+            font-family: var(--font-main);
+          }
+          .btn-reset:hover {
+            background: #f5f5f5;
+          }
+
+          /* --- PRODUCTS GRID --- */
+          .section-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--color-dark);
+            margin-bottom: 25px;
+            margin-top: 0;
+          }
+
+          .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 30px;
+          }
+
+          .product-card {
+            background: #fff;
+            border-radius: 12px;
+            transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--color-border); /* Added a subtle border since the background is white now */
+          }
+          .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); /* Soft shadow on hover */
+          }
+
+          .product-img-wrap {
+            background: #f8f8f8;
+            border-radius: 12px 12px 0 0;
+            padding: 25px;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 15px;
+          }
+
+          .heart-icon {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #fff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+          }
+
+          .product-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+          }
+
+          .product-info {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding: 0 15px 15px 15px;
+          }
+
+          .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 4px;
+          }
+
+          .product-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--color-dark);
+            line-height: 1.3;
+          }
+
+          .product-price {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--color-dark);
+          }
+
+          .product-desc {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .product-rating {
+            color: #FFB300; /* Changed stars to match the theme yellow */
+            font-size: 14px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+          }
+          .rating-count {
+            color: #aaa;
+            font-size: 0.75rem;
+          }
+
+          .product-actions {
             margin-top: auto;
           }
+
+          .btn-add-cart {
+            background: transparent;
+            border: 1px solid var(--color-border);
+            color: var(--color-dark);
+            border-radius: 20px;
+            padding: 6px 18px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: var(--font-main);
+            width: 100%; /* Makes button look nice and uniform */
+          }
           
-          .btn-icon {
-             flex: 1;
-             border: 2px solid black;
-             background: var(--white);
-             height: 44px;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             cursor: pointer;
-             font-weight: 700;
-             transition: 0.2s;
-             box-shadow: 2px 2px 0px var(--black);
-          }
-          .btn-icon:hover { 
-             background: var(--accent-green); 
-             transform: translate(-2px, -2px);
-             box-shadow: 4px 4px 0px var(--black);
+          .btn-add-cart:hover:not(:disabled) {
+            background: var(--color-dark);
+            color: white;
+            border-color: var(--color-dark);
           }
 
-          .btn-buy {
-             flex: 2;
-             background: var(--black);
-             color: white;
-             border: 2px solid black;
-             height: 44px;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             gap: 8px;
-             cursor: pointer;
-             font-weight: 700;
-             transition: 0.2s;
-             box-shadow: 2px 2px 0px rgba(255,255,255,0.3);
-          }
-          .btn-buy:hover { 
-             background: var(--accent-purple); 
-             border-color: black; 
-             transform: translate(-2px, -2px);
-             box-shadow: 4px 4px 0px var(--black);
+          .btn-add-cart:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #f5f5f5;
           }
 
-          /* Load More */
-          .load-more {
-             display: block;
-             margin: 60px auto 0;
-             background: var(--white);
-             border: var(--border-thick);
-             padding: 18px 50px;
-             font-weight: 800;
-             font-size: 1.1rem;
-             cursor: pointer;
-             box-shadow: var(--shadow-hard);
-             transition: 0.2s;
-             text-transform: uppercase;
+          .load-more-btn {
+            display: block;
+            margin: 50px auto 20px;
+            background: #fff;
+            border: 1px solid var(--color-border);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-family: var(--font-main);
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
           }
-          .load-more:hover { 
-             transform: translate(-4px, -4px); 
-             box-shadow: 10px 10px 0px var(--black); 
-             background: var(--accent-green);
+          .load-more-btn:hover {
+            background: #f5f5f5;
           }
 
+          @media (max-width: 768px) {
+            .hero-banner {
+              flex-direction: column;
+              text-align: center;
+              padding: 30px 20px;
+            }
+            .hero-image-container {
+              margin-top: 30px;
+              width: 100%;
+              max-width: 250px;
+            }
+            .app-wrapper {
+              padding: 15px;
+            }
+          }
         `}
       </style>
 
-      <div className="pop-container">
+      <div className="app-wrapper">
 
-        {/* HERO */}
-        <div className="hero-pop">
-          <div className="hero-left">
-            <h1>FRESH DROPS<br />BIG SAVINGS</h1>
-            <p>Don't be boring. Shop the latest collection with style.</p>
-            <button className="btn-pop" onClick={() => window.scrollTo({ top: 800, behavior: 'smooth' })}>
-              START SHOPPING <IconArrowRight />
+        {/* HERO SECTION */}
+        <div className="hero-banner">
+          <div className="hero-content">
+            <h1>Grab Upto 50% Off On<br />Selected Headphone</h1>
+            <button className="btn-buy-now" onClick={() => window.scrollTo({ top: 500, behavior: 'smooth' })}>
+              Buy Now
             </button>
           </div>
-          <div className="hero-deco">
-            %
+
+          {/* HERO IMAGE */}
+          <div className="hero-image-container">
+            <img
+              src="public/hero.png"
+              alt="Headphones Offer"
+              className="hero-image"
+            />
           </div>
         </div>
 
-        {/* MAIN LAYOUT */}
-        <div className="main-grid">
+        {/* INLINE FILTERS BAR */}
+        <div className="filters-bar">
 
-          {/* SIDEBAR */}
-          <aside className="sidebar-box">
-            <div className="filter-title">
-              <IconGrid /> CATEGORY
-            </div>
-
-            <div style={{ display: "flex", flexDirection: "column", marginBottom: "20px" }}>
+          {categories.length > 0 && (
+            <div className="filter-pill-container">
+              <span className="filter-label">Categories:</span>
               {categories.map((c) => (
                 <Checkbox
                   key={c._id}
@@ -529,112 +496,102 @@ const Home = () => {
                 </Checkbox>
               ))}
             </div>
+          )}
 
-            {/* SUBCATEGORIES */}
-            {activeCategory && subCategories.length > 0 && (
-              <>
-                <div className="filter-title">
-                  <IconTag /> SUBCATEGORY
-                </div>
-
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                  {subCategories.map((s) => (
-                    <Checkbox
-                      key={s._id}
-                      checked={subChecked.includes(s._id)}
-                      onChange={(e) =>
-                        handleSubCategoryClick(e.target.checked, s._id)
-                      }
-                    >
-                      {s.name}
-                    </Checkbox>
-                  ))}
-                </div>
-              </>
-            )}
-
-            <div className="filter-title">
-              <IconTag /> PRICE RANGE
-            </div>
-            <Radio.Group onChange={(e) => setRadio(e.target.value)}>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
-                {Price.map((p) => (
-                  <Radio key={p._id} value={p.array}>{p.name}</Radio>
-                ))}
-              </div>
-            </Radio.Group>
-
-            <button className="reset-btn" onClick={() => window.location.reload()}>
-              <IconRefresh /> RESET FILTERS
-            </button>
-          </aside>
-
-          {/* CONTENT */}
-          <main>
-            <h2 className="grid-title">ALL PRODUCTS ({total})</h2>
-
-            <div className="card-grid">
-              {products.map((p, index) => (
-                <div
-                  key={p._id}
-                  className="pop-card"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                  onMouseEnter={() => setHovered(p._id)}
-                  onMouseLeave={() => setHovered(null)}
+          {activeCategory && subCategories.length > 0 && (
+            <div className="filter-pill-container">
+              <span className="filter-label">Types:</span>
+              {subCategories.map((s) => (
+                <Checkbox
+                  key={s._id}
+                  checked={subChecked.includes(s._id)}
+                  onChange={(e) => handleSubCategoryClick(e.target.checked, s._id)}
                 >
-                  {/* Rating Removed as requested */}
-
-                  <div className="pop-img-box">
-                    <img
-                      src={`${import.meta.env.VITE_API_UPLOAD}${p.photo}`}
-                      alt={p.name}
-                      className="pop-img"
-                    />
-                  </div>
-
-                  <div className="pop-info">
-                    <div className="pop-name" title={p.name}>{p.name}</div>
-                    <div className="pop-desc">{p.description.substring(0, 50)}...</div>
-                    <div className="pop-price">{p.price}</div>
-                    {p.quantity === 0 && (
-                      <div style={{ color: "red", fontWeight: "bold", marginBottom: "6px" }}>
-                        OUT OF STOCK
-                      </div>
-                    )}
-                    <div className="pop-actions">
-                      <button
-                        className="btn-icon"
-                        onClick={() => navigate(`/product/${p.slug}`)}
-                        title="View Details"
-                      >
-                        <IconEye />
-                      </button>
-                      <button
-                        className="btn-buy"
-                        disabled={p.quantity === 0}
-                        onClick={() => handleAddToCart(p._id)}
-                        style={{
-                          opacity: p.quantity === 0 ? 0.5 : 1,
-                          cursor: p.quantity === 0 ? "not-allowed" : "pointer",
-                        }}
-                      >
-                        <IconBag />
-                        {p.quantity === 0 ? " OUT OF STOCK" : " ADD TO CART"}
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                  {s.name}
+                </Checkbox>
               ))}
             </div>
+          )}
 
-            {!isFiltering && products.length < total && (
-              <button className="load-more" onClick={() => setPage(page + 1)}>
-                {loading ? "LOADING..." : "LOAD MORE STUFF"}
-              </button>
-            )}
-          </main>
+          <div className="filter-pill-container">
+            <span className="filter-label">Price:</span>
+            <Radio.Group onChange={(e) => setRadio(e.target.value)} style={{ display: 'flex', gap: '8px' }}>
+              {Price.map((p) => (
+                <Radio key={p._id} value={p.array}>{p.name}</Radio>
+              ))}
+            </Radio.Group>
+          </div>
 
+          {(checked.length > 0 || radio.length > 0 || subChecked.length > 0) && (
+            <button className="btn-reset" onClick={() => window.location.reload()}>
+              <IconRefresh /> Clear Filters
+            </button>
+          )}
         </div>
+
+        {/* PRODUCTS SECTION */}
+        <h2 className="section-title">Headphones For You!</h2>
+
+        <div className="product-grid">
+          {products.map((p) => (
+            <div key={p._id} className="product-card">
+
+              <div className="product-img-wrap">
+                <div className="heart-icon">
+                  <IconHeart />
+                </div>
+                <img
+                  src={`${import.meta.env.VITE_API_UPLOAD}${p.photo}`}
+                  alt={p.name}
+                  className="product-img"
+                  onClick={() => navigate(`/product/${p.slug}`)}
+                  style={{ cursor: 'pointer' }}
+                />
+              </div>
+
+              <div className="product-info">
+                <div className="product-header">
+                  <div className="product-name" title={p.name}>{p.name}</div>
+                  <div className="product-price">${p.price}</div>
+                </div>
+
+                <div className="product-desc">
+                  {p.description.substring(0, 40)}...
+                </div>
+
+                {/* Static rating placeholder to match your screenshot design */}
+                <div className="product-rating">
+                  ★★★★★ <span className="rating-count">(121)</span>
+                </div>
+
+                {p.quantity === 0 && (
+                  <div style={{ color: "red", fontSize: "0.8rem", fontWeight: "600", marginBottom: "8px" }}>
+                    OUT OF STOCK
+                  </div>
+                )}
+
+                <div className="product-actions">
+                  <button
+                    className="btn-add-cart"
+                    disabled={p.quantity === 0}
+                    onClick={() => handleAddToCart(p._id)}
+                  >
+                    {p.quantity === 0 ? "Out of Stock" : "Add to Cart"}
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          ))}
+        </div>
+
+        {/* LOAD MORE */}
+        {!isFiltering && products.length < total && (
+          <button className="load-more-btn" onClick={() => setPage(page + 1)}>
+            {loading ? "Loading..." : "Load More"}
+          </button>
+        )}
+
       </div>
     </Layout>
   );

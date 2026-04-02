@@ -111,14 +111,13 @@ const Header = () => {
       </header>
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
         :root {
-          --border: 2.5px solid #000;
-          --shadow: 4px 4px 0px #000;
-          --font: 'Space Grotesk', sans-serif;
-          --yellow: #ffdb4d;
-          --purple: #a855f7;
+          --color-yellow: #FFB300;
+          --color-dark: #222222;
+          --color-border: #eaeaea;
+          --font-main: 'Poppins', sans-serif;
         }
 
         /* --- LAYOUT GRID --- */
@@ -126,16 +125,17 @@ const Header = () => {
           position: sticky;
           top: 0;
           z-index: 999;
-          background: #fff;
-          border-bottom: var(--border);
+          background: #ffffff;
+          border-bottom: 1px solid var(--color-border);
           padding: 15px 0;
-          font-family: var(--font);
+          font-family: var(--font-main);
+          box-shadow: 0 4px 20px rgba(0,0,0,0.03); /* Soft modern shadow */
         }
 
         .header-container {
-          max-width: 1440px;
+          max-width: 1300px;
           margin: 0 auto;
-          padding: 0 20px;
+          padding: 0 40px;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -147,35 +147,31 @@ const Header = () => {
         
         .brand-logo {
           display: flex;
-          align-items: stretch;
+          align-items: center;
           text-decoration: none;
-          box-shadow: 3px 3px 0px #000;
-          transition: 0.2s;
+          transition: transform 0.2s;
+          gap: 8px;
         }
         .brand-logo:hover {
-          transform: translate(-2px, -2px);
-          box-shadow: 5px 5px 0px #000;
+          transform: translateY(-2px);
         }
 
         .logo-icon-box {
-          background: #000;
-          color: var(--yellow);
-          padding: 8px 12px;
-          border: var(--border);
-          border-right: none;
+          background: var(--color-yellow);
+          color: var(--color-dark);
+          width: 40px;
+          height: 40px;
+          border-radius: 8px;
           display: flex;
           align-items: center;
           justify-content: center;
         }
         
         .logo-text {
-          background: var(--yellow);
-          color: #000;
+          color: var(--color-dark);
           font-size: 1.5rem;
-          font-weight: 800;
-          padding: 8px 15px;
-          border: var(--border);
-          letter-spacing: -1px;
+          font-weight: 700;
+          letter-spacing: -0.5px;
         }
 
         /* --- 2. SEARCH --- */
@@ -185,7 +181,7 @@ const Header = () => {
           margin: 0 20px;
         }
         
-        /* Force Search Styles */
+        /* Clean Search Styles */
         .search-wrapper form {
           display: flex;
           height: 44px;
@@ -193,72 +189,88 @@ const Header = () => {
         }
         .search-wrapper input {
           flex-grow: 1;
-          border: var(--border) !important;
+          border: 1px solid var(--color-border) !important;
           border-right: none !important;
-          border-radius: 0 !important;
-          padding: 0 15px;
-          font-weight: 500;
+          border-radius: 22px 0 0 22px !important;
+          padding: 0 20px;
+          font-size: 0.9rem;
           outline: none;
-          font-family: var(--font);
+          font-family: var(--font-main);
+          color: var(--color-dark);
         }
         .search-wrapper button {
-          border: var(--border) !important;
-          background: #000 !important;
+          background: var(--color-dark) !important;
           color: #fff !important;
-          border-radius: 0 !important;
-          padding: 0 20px;
-          font-weight: 700;
-          text-transform: uppercase;
+          border: none !important;
+          border-radius: 0 22px 22px 0 !important;
+          padding: 0 25px;
+          font-weight: 500;
+          font-size: 0.9rem;
+          cursor: pointer;
+          transition: background 0.2s;
+        }
+        .search-wrapper button:hover {
+          background: #000 !important;
         }
 
         /* --- 3. NAVIGATION --- */
         .header-right { flex-shrink: 0; }
-        .nav-menu { display: flex; align-items: center; gap: 15px; }
+        .nav-menu { display: flex; align-items: center; gap: 20px; }
 
         .nav-item {
           display: flex;
           align-items: center;
-          gap: 8px;
-          font-weight: 700;
-          color: #000;
+          gap: 6px;
+          font-weight: 500;
+          color: var(--color-dark);
           text-decoration: none;
           cursor: pointer;
-          font-size: 0.9rem;
+          font-size: 0.95rem;
           height: 44px;
-          padding: 0 10px;
           transition: color 0.2s;
         }
-        .nav-item:hover { color: var(--purple); }
+        .nav-item:hover { color: var(--color-yellow); }
+        
+        .user-capsule {
+          display: flex; 
+          align-items: center; 
+          gap: 6px; 
+          cursor: pointer;
+        }
 
         /* BUTTONS */
         .nav-btn {
-          height: 44px;
+          height: 40px;
           display: flex;
           align-items: center;
           padding: 0 20px;
-          font-weight: 700;
+          font-weight: 500;
           text-decoration: none;
-          border: var(--border);
           font-size: 0.9rem;
-          transition: 0.2s;
-          white-space: nowrap;
+          transition: all 0.2s;
+          border-radius: 20px;
           gap: 8px;
         }
-        .nav-btn:hover { transform: translate(-2px, -2px); box-shadow: 3px 3px 0px #000; }
+        .nav-btn:hover { 
+          transform: translateY(-2px); 
+          box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+        }
 
-        .black { background: #000; color: #fff; }
-        .white { background: #fff; color: #000; }
-        .purple { background: var(--purple); color: #fff; }
+        .black { background: var(--color-dark); color: #fff; border: none; }
+        .white { background: #fff; border: 1px solid var(--color-border); color: var(--color-dark); }
+        
+        /* Overridden the old purple class to match the clean Yellow/Black theme */
+        .purple { background: var(--color-yellow); color: var(--color-dark); border: none; }
 
         .badge {
-          background: var(--yellow);
-          color: #000;
+          background: var(--color-dark);
+          color: var(--color-yellow);
           font-size: 0.75rem;
-          padding: 2px 6px;
-          border: 1.5px solid #000;
-          border-radius: 50%;
+          padding: 2px 8px;
+          border-radius: 12px;
           min-width: 20px;
           text-align: center;
+          font-weight: 600;
         }
 
         /* DROPDOWNS */
@@ -269,34 +281,38 @@ const Header = () => {
           top: 100%;
           left: 0;
           background: #fff;
-          border: var(--border);
+          border: 1px solid var(--color-border);
+          border-radius: 12px;
           min-width: 200px;
           flex-direction: column;
-          box-shadow: 4px 4px 0px #000;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.05);
           z-index: 1000;
           margin-top: 5px;
+          overflow: hidden;
         }
         .dropdown-trigger:hover .dropdown-menu-pop { display: flex; }
         .right-align { right: 0; left: auto; }
 
         .dd-link {
-          padding: 12px 15px;
-          color: #000;
+          padding: 12px 20px;
+          color: var(--color-dark);
           text-decoration: none;
-          border-bottom: 2px solid #000;
-          font-weight: 600;
+          border-bottom: 1px solid var(--color-border);
+          font-weight: 500;
           font-size: 0.9rem;
+          transition: 0.2s;
         }
-        .dd-link:hover { background: var(--yellow); }
+        .dd-link:hover { background: #f9f9f9; color: var(--color-yellow); }
         .dd-link:last-child { border-bottom: none; }
         .logout { display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #ef4444; }
 
         /* MOBILE */
-        .mobile-toggle { display: none; background: none; border: none; cursor: pointer; }
+        .mobile-toggle { display: none; background: none; border: none; cursor: pointer; color: var(--color-dark); }
 
         @media (max-width: 992px) {
           .header-center { display: none; }
           .mobile-toggle { display: block; }
+          .header-container { padding: 0 20px; }
           .nav-menu {
             display: none;
             position: absolute;
@@ -304,7 +320,8 @@ const Header = () => {
             background: #fff;
             flex-direction: column;
             padding: 20px;
-            border-bottom: var(--border);
+            border-bottom: 1px solid var(--color-border);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
             gap: 15px;
             align-items: stretch;
           }
