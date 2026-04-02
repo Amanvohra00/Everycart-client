@@ -15,10 +15,12 @@ const AdminDashboard = () => {
           {/* HEADER */}
           <div className="dashboard-header">
              <div className="header-title-box">
-                <ShieldCheck size={28} strokeWidth={2.5} />
-                <h1>ADMIN PORTAL</h1>
+                <div className="title-icon">
+                  <ShieldCheck size={28} strokeWidth={2.5} />
+                </div>
+                <h1>Admin Portal</h1>
              </div>
-             <p>Welcome back, Administrator. Manage your system below.</p>
+             <p className="subtitle">Welcome back, Administrator. Manage your system below.</p>
           </div>
 
           {/* GRID LAYOUT */}
@@ -34,7 +36,7 @@ const AdminDashboard = () => {
               
               <div className="admin-card">
                  <div className="card-header">
-                    <h2>ADMINISTRATOR DETAILS</h2>
+                    <h2>Administrator Details</h2>
                     <div className="badge">ACTIVE</div>
                  </div>
                  
@@ -42,30 +44,30 @@ const AdminDashboard = () => {
                     
                     <div className="info-row">
                        <div className="icon-box">
-                          <User size={24} strokeWidth={2.5} />
+                          <User size={22} strokeWidth={2.5} />
                        </div>
                        <div className="info-data">
-                          <span className="label">ADMIN NAME</span>
+                          <span className="label">Admin Name</span>
                           <span className="value">{auth?.user?.name}</span>
                        </div>
                     </div>
 
                     <div className="info-row">
                        <div className="icon-box">
-                          <Mail size={24} strokeWidth={2.5} />
+                          <Mail size={22} strokeWidth={2.5} />
                        </div>
                        <div className="info-data">
-                          <span className="label">ADMIN EMAIL</span>
+                          <span className="label">Admin Email</span>
                           <span className="value">{auth?.user?.email}</span>
                        </div>
                     </div>
 
                     <div className="info-row">
                        <div className="icon-box">
-                          <Phone size={24} strokeWidth={2.5} />
+                          <Phone size={22} strokeWidth={2.5} />
                        </div>
                        <div className="info-data">
-                          <span className="label">CONTACT NO.</span>
+                          <span className="label">Contact No.</span>
                           <span className="value">{auth?.user?.phone}</span>
                        </div>
                     </div>
@@ -80,84 +82,92 @@ const AdminDashboard = () => {
       </div>
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
         :root {
-          --black: #000000;
-          --white: #ffffff;
-          --off-white: #fdfbf7;
-          --yellow: #ffdb4d;
-          --purple: #a855f7;
-          --green: #4ade80;
-          --red: #ef4444;
-          --border: 2.5px solid var(--black);
-          --shadow: 6px 6px 0px var(--black);
-          --font: 'Space Grotesk', sans-serif;
+          --color-yellow: #FFB300;
+          --color-dark: #222222;
+          --color-border: #eaeaea;
+          --color-muted: #888888;
+          --color-bg-page: #f8f9fa;
+          --font-main: 'Poppins', sans-serif;
         }
 
         .pop-page-background {
-          background-color: var(--off-white);
-          background-image: radial-gradient(var(--black) 1.5px, transparent 1.5px);
-          background-size: 24px 24px;
+          background-color: var(--color-bg-page);
           min-height: 90vh;
           padding: 40px 0;
-          font-family: var(--font);
+          font-family: var(--font-main);
         }
 
         .pop-container {
-          max-width: 1200px;
+          max-width: 1300px;
           margin: 0 auto;
-          padding: 0 20px;
+          padding: 0 40px;
         }
 
         /* HEADER */
         .dashboard-header {
            margin-bottom: 40px;
-           text-align: center;
            display: flex;
            flex-direction: column;
-           align-items: center;
+           align-items: flex-start;
         }
 
         .header-title-box {
-           background: var(--black);
-           color: var(--white);
-           border: var(--border);
-           padding: 10px 30px;
-           display: inline-flex;
+           display: flex;
            align-items: center;
            gap: 15px;
-           box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
-           transform: rotate(-1deg);
-           margin-bottom: 10px;
+           margin-bottom: 8px;
+        }
+
+        .title-icon {
+           background: var(--color-yellow);
+           color: var(--color-dark);
+           width: 48px;
+           height: 48px;
+           border-radius: 12px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
         }
 
         .header-title-box h1 {
            font-size: 2rem;
-           font-weight: 800;
+           font-weight: 600;
            margin: 0;
-           letter-spacing: 1px;
+           color: var(--color-dark);
+           letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+           font-size: 1rem;
+           color: var(--color-muted);
+           margin: 0;
+           font-weight: 400;
         }
 
         /* LAYOUT */
         .dashboard-grid {
            display: grid;
            grid-template-columns: 280px 1fr;
-           gap: 40px;
+           gap: 30px;
            align-items: start;
         }
 
         /* ADMIN CARD */
         .admin-card {
-           background: var(--white);
-           border: var(--border);
-           box-shadow: var(--shadow);
+           background: #ffffff;
+           border: 1px solid var(--color-border);
+           border-radius: 12px;
+           box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+           overflow: hidden;
         }
 
         .card-header {
-           background: var(--yellow);
-           padding: 20px;
-           border-bottom: var(--border);
+           background: #ffffff;
+           padding: 25px 30px;
+           border-bottom: 1px solid var(--color-border);
            display: flex;
            justify-content: space-between;
            align-items: center;
@@ -165,55 +175,60 @@ const AdminDashboard = () => {
 
         .card-header h2 {
            font-size: 1.2rem;
-           font-weight: 800;
+           font-weight: 600;
            margin: 0;
-           text-transform: uppercase;
+           color: var(--color-dark);
         }
 
         .badge {
-           background: var(--black);
-           color: var(--green);
+           background: #e8f5e9;
+           color: #2e7d32;
            font-size: 0.8rem;
-           font-weight: 700;
-           padding: 4px 10px;
-           border-radius: 4px;
+           font-weight: 600;
+           padding: 6px 12px;
+           border-radius: 20px;
+           letter-spacing: 0.5px;
         }
 
         .card-body {
            padding: 30px;
            display: flex;
            flex-direction: column;
-           gap: 20px;
+           gap: 15px;
         }
 
         .info-row {
            display: flex;
            align-items: center;
            gap: 20px;
-           padding: 15px;
-           border: 2px solid #eee;
-           transition: 0.2s;
+           padding: 20px;
+           border: 1px solid var(--color-border);
+           border-radius: 12px;
+           background: #ffffff;
+           transition: transform 0.2s, box-shadow 0.2s;
         }
         .info-row:hover {
-           border-color: var(--black);
-           background: var(--off-white);
-           box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
-           transform: translateX(5px);
+           border-color: var(--color-yellow);
+           box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+           transform: translateY(-2px);
         }
 
         .icon-box {
-           width: 50px; height: 50px;
-           background: var(--black);
-           color: var(--white);
-           border-radius: 50%;
-           display: flex; align-items: center; justify-content: center;
+           width: 50px; 
+           height: 50px;
+           background: #f8f9fa;
+           color: var(--color-dark);
+           border-radius: 10px;
+           display: flex; 
+           align-items: center; 
+           justify-content: center;
            flex-shrink: 0;
+           transition: background 0.2s;
         }
         
-        /* Icon Colors */
-        .info-row:nth-child(1) .icon-box { background: var(--purple); }
-        .info-row:nth-child(2) .icon-box { background: var(--green); color: var(--black); }
-        .info-row:nth-child(3) .icon-box { background: var(--red); }
+        .info-row:hover .icon-box {
+           background: var(--color-yellow);
+        }
 
         .info-data {
            display: flex;
@@ -221,22 +236,22 @@ const AdminDashboard = () => {
         }
 
         .label {
-           font-size: 0.75rem;
-           font-weight: 800;
-           color: #888;
-           letter-spacing: 1px;
-           margin-bottom: 2px;
+           font-size: 0.85rem;
+           font-weight: 500;
+           color: var(--color-muted);
+           margin-bottom: 4px;
         }
 
         .value {
-           font-size: 1.2rem;
-           font-weight: 700;
-           color: var(--black);
+           font-size: 1.1rem;
+           font-weight: 600;
+           color: var(--color-dark);
         }
 
         /* RESPONSIVE */
         @media (max-width: 900px) {
            .dashboard-grid { grid-template-columns: 1fr; }
+           .pop-container { padding: 0 20px; }
         }
       `}</style>
     </Layout>

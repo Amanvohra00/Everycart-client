@@ -473,7 +473,7 @@ const Home = () => {
           {/* HERO IMAGE */}
           <div className="hero-image-container">
             <img
-              src="public/hero.png"
+              src="/hero.png"
               alt="Headphones Offer"
               className="hero-image"
             />

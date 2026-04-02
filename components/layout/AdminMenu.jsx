@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { LayoutList, PackagePlus, ShoppingBag ,ListOrderedIcon} from "lucide-react";
+import { LayoutList, PackagePlus, ShoppingBag, ListOrderedIcon } from "lucide-react";
 
 const AdminMenu = () => {
   return (
@@ -16,7 +16,7 @@ const AdminMenu = () => {
             className="pop-nav-link"
           >
             <LayoutList size={20} strokeWidth={2.5} />
-            CREATE CATEGORY
+            Create Category
           </NavLink>
 
           <NavLink
@@ -24,7 +24,7 @@ const AdminMenu = () => {
             className="pop-nav-link"
           >
             <LayoutList size={20} strokeWidth={2.5} />
-            CREATE SUBCATEGORY
+            Create Subcategory
           </NavLink>
 
           <NavLink
@@ -32,7 +32,7 @@ const AdminMenu = () => {
             className="pop-nav-link"
           >
             <PackagePlus size={20} strokeWidth={2.5} />
-            CREATE PRODUCT
+            Create Product
           </NavLink>
 
           <NavLink
@@ -40,7 +40,7 @@ const AdminMenu = () => {
             className="pop-nav-link"
           >
             <ShoppingBag size={20} strokeWidth={2.5} />
-            PRODUCTS
+            Products
           </NavLink>
 
           <NavLink
@@ -56,69 +56,85 @@ const AdminMenu = () => {
       {/* STYLES */}
       <style>
         {`
-          @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+          :root {
+            --color-yellow: #FFB300;
+            --color-dark: #222222;
+            --color-border: #eaeaea;
+            --color-muted: #888888;
+            --font-main: 'Poppins', sans-serif;
+          }
 
           .pop-menu-card {
             background: #ffffff;
-            border: 2.5px solid #000000;
-            box-shadow: 5px 5px 0px #000000;
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
             overflow: hidden;
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: var(--font-main);
             position: sticky;
             top: 20px;
           }
 
           .menu-header {
-            background: #ffdb4d; /* Yellow */
-            padding: 15px;
-            text-align: center;
-            font-weight: 800;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            border-bottom: 2.5px solid #000000;
+            background: #ffffff;
+            padding: 20px 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--color-dark);
+            border-bottom: 1px solid var(--color-border);
+            letter-spacing: 0.5px;
           }
 
           .menu-list {
              display: flex;
              flex-direction: column;
+             padding: 15px;
+             gap: 8px;
           }
 
           .pop-nav-link {
             display: flex;
             align-items: center;
             gap: 15px;
-            padding: 18px 20px;
+            padding: 14px 18px;
             text-decoration: none;
-            color: #000000;
-            font-weight: 700;
-            font-size: 0.9rem;
-            border-bottom: 2.5px solid #000000;
+            color: var(--color-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            border-radius: 8px;
             transition: all 0.2s ease;
-            background: #fff;
+            background: transparent;
           }
 
-          /* Remove border from last item */
-          .pop-nav-link:last-child {
-             border-bottom: none;
+          /* Default Icon Color */
+          .pop-nav-link svg {
+            color: var(--color-muted);
+            transition: color 0.2s ease;
           }
 
           /* HOVER STATE */
           .pop-nav-link:hover {
-            background: #fdfbf7;
-            padding-left: 28px; /* Slide Effect */
-            color: #a855f7; /* Purple */
+            background: #f8f9fa;
+            color: var(--color-yellow);
+          }
+
+          .pop-nav-link:hover svg {
+            color: var(--color-yellow);
           }
 
           /* ACTIVE STATE */
           .pop-nav-link.active {
-            background: #000000;
-            color: #ffffff;
-            padding-left: 28px;
+            background: var(--color-yellow);
+            color: var(--color-dark);
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(255, 179, 0, 0.2);
           }
 
           /* INVERT ICON ON ACTIVE */
           .pop-nav-link.active svg {
-             stroke: #4ade80; /* Green accent on active icon */
+             color: var(--color-dark);
           }
         `}
       </style>

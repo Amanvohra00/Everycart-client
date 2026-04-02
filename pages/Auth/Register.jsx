@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
 // Switched to Lucide icons for the new design style
-import { User, Mail, Lock, Phone, MapPin, HelpCircle, ArrowRight, UserPlus } from "lucide-react";
+import { User, Mail, Lock, Phone, MapPin, ArrowRight, UserPlus } from "lucide-react";
 
 const Register = () => {
     const [name, setName] = useState("");
@@ -41,9 +41,9 @@ const Register = () => {
                         {/* HEADER */}
                         <div className="auth-header">
                             <div className="icon-circle">
-                                <UserPlus size={40} strokeWidth={2.5} />
+                                <UserPlus size={32} strokeWidth={2.5} />
                             </div>
-                            <h1 className="auth-title">CREATE ACCOUNT</h1>
+                            <h1 className="auth-title">Create Account</h1>
                             <p className="auth-subtitle">Join us for a seamless shopping experience</p>
                         </div>
 
@@ -52,7 +52,7 @@ const Register = () => {
                             
                             {/* NAME */}
                             <div className="form-group">
-                                <label className="form-label">FULL NAME</label>
+                                <label className="form-label">Full Name</label>
                                 <div className="input-wrapper">
                                     <User size={20} className="input-icon" />
                                     <input
@@ -60,7 +60,7 @@ const Register = () => {
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
                                         className="pop-input"
-                                        placeholder="Full Name"
+                                        placeholder="Enter your full name"
                                         required
                                     />
                                 </div>
@@ -68,7 +68,7 @@ const Register = () => {
 
                             {/* EMAIL */}
                             <div className="form-group">
-                                <label className="form-label">EMAIL ADDRESS</label>
+                                <label className="form-label">Email Address</label>
                                 <div className="input-wrapper">
                                     <Mail size={20} className="input-icon" />
                                     <input
@@ -76,7 +76,7 @@ const Register = () => {
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         className="pop-input"
-                                        placeholder="Email Address"
+                                        placeholder="name@example.com"
                                         required
                                     />
                                 </div>
@@ -84,7 +84,7 @@ const Register = () => {
 
                             {/* PASSWORD */}
                             <div className="form-group">
-                                <label className="form-label">PASSWORD</label>
+                                <label className="form-label">Password</label>
                                 <div className="input-wrapper">
                                     <Lock size={20} className="input-icon" />
                                     <input
@@ -92,7 +92,7 @@ const Register = () => {
                                         value={password}
                                         onChange={(e) => setPssword(e.target.value)}
                                         className="pop-input"
-                                        placeholder="Password"
+                                        placeholder="••••••••"
                                         required
                                     />
                                 </div>
@@ -100,7 +100,7 @@ const Register = () => {
 
                             {/* PHONE */}
                             <div className="form-group">
-                                <label className="form-label">PHONE</label>
+                                <label className="form-label">Phone Number</label>
                                 <div className="input-wrapper">
                                     <Phone size={20} className="input-icon" />
                                     <input
@@ -108,7 +108,7 @@ const Register = () => {
                                         value={phone}
                                         onChange={(e) => setPhone(e.target.value)}
                                         className="pop-input"
-                                        placeholder="Phone"
+                                        placeholder="Enter your phone number"
                                         required
                                     />
                                 </div>
@@ -116,7 +116,7 @@ const Register = () => {
 
                             {/* ADDRESS */}
                             <div className="form-group">
-                                <label className="form-label">ADDRESS</label>
+                                <label className="form-label">Address</label>
                                 <div className="input-wrapper">
                                     <MapPin size={20} className="input-icon" />
                                     <input
@@ -124,15 +124,14 @@ const Register = () => {
                                         value={address}
                                         onChange={(e) => setAddress(e.target.value)}
                                         className="pop-input"
-                                        placeholder="Address"
+                                        placeholder="Enter your full address"
                                         required
                                     />
                                 </div>
                             </div>
 
-
                             <button type="submit" className="btn-pop-primary">
-                                REGISTER <ArrowRight size={20} />
+                                Create Account <ArrowRight size={18} />
                             </button>
 
                         </form>
@@ -140,7 +139,7 @@ const Register = () => {
                         {/* FOOTER */}
                         <div className="auth-footer">
                             <p>Already have an account?</p>
-                            <Link to="/login" className="link-text">LOGIN HERE</Link>
+                            <Link to="/login" className="link-text">Login Here</Link>
                         </div>
 
                     </div>
@@ -148,176 +147,173 @@ const Register = () => {
             </div>
 
             <style>{`
-                @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap');
+                @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
                 :root {
-                    --black: #000000;
-                    --white: #ffffff;
-                    --off-white: #fdfbf7;
-                    --yellow: #ffdb4d;
-                    --purple: #a855f7;
-                    --green: #4ade80;
-                    --border: 2.5px solid var(--black);
-                    --shadow: 5px 5px 0px var(--black);
-                    --shadow-hover: 8px 8px 0px var(--black);
-                    --font: 'Space Grotesk', sans-serif;
+                  --color-yellow: #FFB300;
+                  --color-dark: #222222;
+                  --color-border: #eaeaea;
+                  --color-muted: #888888;
+                  --color-bg-page: #f8f9fa;
+                  --font-main: 'Poppins', sans-serif;
                 }
 
                 .pop-page-background {
-                    background-color: var(--off-white);
-                    background-image: radial-gradient(var(--black) 1.5px, transparent 1.5px);
-                    background-size: 24px 24px;
-                    min-height: 90vh;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 40px 20px;
-                    font-family: var(--font);
+                  background-color: var(--color-bg-page);
+                  min-height: 90vh;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  padding: 40px 20px;
+                  font-family: var(--font-main);
                 }
 
                 .auth-container {
-                    width: 100%;
-                    max-width: 500px;
+                   width: 100%;
+                   max-width: 480px;
                 }
 
-                /* --- CARD --- */
+                /* --- AUTH CARD --- */
                 .auth-card {
-                    background: var(--white);
-                    border: var(--border);
-                    padding: 40px;
-                    box-shadow: var(--shadow);
-                    position: relative;
-                    animation: fadeUp 0.6s ease;
-                }
-
-                @keyframes fadeUp {
-                    from { opacity: 0; transform: translateY(20px); }
-                    to { opacity: 1; transform: translateY(0); }
+                   background: #ffffff;
+                   border: 1px solid var(--color-border);
+                   border-radius: 16px;
+                   padding: 40px;
+                   box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+                   position: relative;
                 }
 
                 /* HEADER */
                 .auth-header {
-                    text-align: center;
-                    margin-bottom: 30px;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
+                   text-align: center;
+                   margin-bottom: 30px;
+                   display: flex;
+                   flex-direction: column;
+                   align-items: center;
                 }
 
                 .icon-circle {
-                    width: 70px; height: 70px;
-                    background: var(--green);
-                    color: var(--black);
-                    border: var(--border);
-                    border-radius: 50%;
-                    display: flex; align-items: center; justify-content: center;
-                    margin-bottom: 15px;
-                    box-shadow: 3px 3px 0px var(--black);
+                   width: 64px; 
+                   height: 64px;
+                   background: var(--color-yellow);
+                   color: var(--color-dark);
+                   border-radius: 16px;
+                   display: flex; 
+                   align-items: center; 
+                   justify-content: center;
+                   margin-bottom: 20px;
                 }
 
                 .auth-title {
-                    font-size: 2rem;
-                    font-weight: 800;
-                    margin-bottom: 5px;
-                    letter-spacing: -1px;
-                    text-transform: uppercase;
+                   font-size: 1.8rem;
+                   font-weight: 600;
+                   color: var(--color-dark);
+                   margin-bottom: 5px;
+                   letter-spacing: -0.5px;
                 }
 
                 .auth-subtitle {
-                    color: #666;
-                    font-weight: 500;
-                    font-size: 0.95rem;
+                   color: var(--color-muted);
+                   font-size: 0.95rem;
+                   margin: 0;
                 }
 
                 /* FORM */
                 .auth-form {
-                    display: flex; flex-direction: column; gap: 15px;
+                   display: flex; 
+                   flex-direction: column; 
+                   gap: 20px;
                 }
 
                 .form-group { text-align: left; }
 
                 .form-label {
-                    font-size: 0.8rem;
-                    font-weight: 700;
-                    margin-bottom: 6px;
-                    display: block;
-                    text-transform: uppercase;
-                    letter-spacing: 0.5px;
+                   font-size: 0.85rem;
+                   font-weight: 500;
+                   color: var(--color-dark);
+                   margin-bottom: 8px;
+                   display: block;
                 }
 
                 .input-wrapper { position: relative; }
 
                 .input-icon {
-                    position: absolute;
-                    left: 12px;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    color: var(--black);
+                   position: absolute;
+                   left: 14px;
+                   top: 50%;
+                   transform: translateY(-50%);
+                   color: var(--color-muted);
                 }
 
                 .pop-input {
-                    width: 100%;
-                    padding: 12px 12px 12px 40px;
-                    border: var(--border);
-                    font-family: var(--font);
-                    font-weight: 600;
-                    font-size: 1rem;
-                    outline: none;
-                    transition: 0.2s;
-                    background: var(--off-white);
+                   width: 100%;
+                   padding: 12px 14px 12px 42px;
+                   border: 1px solid var(--color-border);
+                   border-radius: 8px;
+                   font-family: var(--font-main);
+                   font-weight: 400;
+                   font-size: 0.95rem;
+                   color: var(--color-dark);
+                   outline: none;
+                   transition: all 0.2s ease;
+                   box-sizing: border-box;
+                }
+                .pop-input::placeholder {
+                   color: #bbbbbb;
                 }
                 .pop-input:focus {
-                    background: var(--white);
-                    box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
-                    border-color: var(--purple);
+                   border-color: var(--color-yellow);
+                   box-shadow: 0 0 0 3px rgba(255, 179, 0, 0.1);
                 }
 
                 /* BUTTON */
                 .btn-pop-primary {
-                    width: 100%;
-                    background: var(--black);
-                    color: var(--white);
-                    padding: 14px;
-                    font-weight: 700;
-                    font-size: 1rem;
-                    border: var(--border);
-                    cursor: pointer;
-                    box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
-                    transition: 0.2s;
-                    margin-top: 15px;
-                    display: flex; align-items: center; justify-content: center; gap: 10px;
+                   width: 100%;
+                   background: var(--color-dark);
+                   color: #ffffff;
+                   padding: 14px;
+                   font-weight: 500;
+                   font-size: 1rem;
+                   border-radius: 8px;
+                   border: none;
+                   cursor: pointer;
+                   transition: transform 0.2s, box-shadow 0.2s;
+                   margin-top: 10px;
+                   font-family: var(--font-main);
+                   display: flex; 
+                   align-items: center; 
+                   justify-content: center; 
+                   gap: 8px;
                 }
                 .btn-pop-primary:hover {
-                    background: var(--purple);
-                    color: var(--white);
-                    transform: translate(-2px, -2px);
-                    box-shadow: var(--shadow-hover);
+                   transform: translateY(-2px);
+                   box-shadow: 0 8px 15px rgba(0,0,0,0.1);
                 }
 
                 /* FOOTER */
                 .auth-footer {
-                    margin-top: 30px;
-                    text-align: center;
-                    font-size: 0.95rem;
-                    font-weight: 500;
-                    border-top: 2px solid #eee;
-                    padding-top: 20px;
+                   margin-top: 30px;
+                   text-align: center;
+                   font-size: 0.9rem;
+                   color: var(--color-muted);
+                   border-top: 1px solid var(--color-border);
+                   padding-top: 20px;
+                   display: flex;
+                   justify-content: center;
+                   gap: 5px;
                 }
 
                 .link-text {
-                    display: inline-block;
-                    margin-left: 5px;
-                    color: var(--black);
-                    font-weight: 800;
-                    text-decoration: none;
-                    background: var(--yellow);
-                    padding: 2px 8px;
-                    border: 1px solid var(--black);
-                    box-shadow: 2px 2px 0px var(--black);
-                    text-transform: uppercase;
-                    font-size: 0.85rem;
+                   color: var(--color-yellow);
+                   font-weight: 600;
+                   text-decoration: none;
+                   transition: color 0.2s;
                 }
-                .link-text:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0px var(--black); }
+                .link-text:hover { 
+                   color: var(--color-dark);
+                   text-decoration: underline; 
+                }
+
             `}</style>
         </Layout>
     );
