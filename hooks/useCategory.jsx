@@ -6,7 +6,7 @@ import axios from 'axios'
     //getcatgory
     const getCategoires=async()=>{
         try {
-            const {data}=await axios.get('/api/v1/category/get-category')
+            const {data}=await axios.get(`${import.meta.env.VITE_API}/category/get-category`)
             setCategories(data?.categories)
         } catch (error) {
             console.log(error)

@@ -464,7 +464,7 @@ const Home = () => {
         {/* HERO SECTION */}
         <div className="hero-banner">
           <div className="hero-content">
-            <h1>Grab Upto 50% Off On<br />Selected Headphone</h1>
+            <h1>Shop Anythig with Us<br />Any Time, Any Place</h1>
             <button className="btn-buy-now" onClick={() => window.scrollTo({ top: 500, behavior: 'smooth' })}>
               Buy Now
             </button>
