@@ -78,8 +78,8 @@ const ProductDetails = () => {
    if (loading) {
       return (
          <Layout>
-            <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-               <h2 style={{ fontFamily: 'Space Grotesk', fontWeight: 'bold' }}>LOADING...</h2>
+            <div style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f8f9fa' }}>
+               <h2 style={{ fontFamily: 'Poppins', fontWeight: '500', color: '#888' }}>Loading Product...</h2>
             </div>
          </Layout>
       )
@@ -87,364 +87,397 @@ const ProductDetails = () => {
 
    return (
       <Layout title={product?.name}>
-         <div className="pop-container">
+         <div className="pop-page-background">
+            <div className="pop-container">
 
-            {/* --- MAIN PRODUCT SECTION --- */}
-            <div className="product-showcase">
+               {/* --- MAIN PRODUCT SECTION --- */}
+               <div className="product-showcase">
 
-               {/* LEFT: IMAGE */}
-               <div className="showcase-left">
-                  <div className="main-img-box">
-                     <div className="sticker-badge">NEW DROP</div>
-                     <img
-                        src={product?.photo ? `${import.meta.env.VITE_API_UPLOAD}${product.photo}` : "/placeholder.png"}
-                        alt={product?.name}
-                        className="main-img"
-                     />
-                  </div>
-               </div>
-
-               {/* RIGHT: DETAILS */}
-               <div className="showcase-right">
-                  <div className="breadcrumb">
-                     HOME / SHOP / {product?.category?.name?.toUpperCase()}
+                  {/* LEFT: IMAGE */}
+                  <div className="showcase-left">
+                     <div className="main-img-box">
+                        <div className="sticker-badge">NEW DROP</div>
+                        <img
+                           src={product?.photo ? `${import.meta.env.VITE_API_UPLOAD}${product.photo}` : "/placeholder.png"}
+                           alt={product?.name}
+                           className="main-img"
+                        />
+                     </div>
                   </div>
 
-                  <h1 className="prod-title">{product?.name}</h1>
+                  {/* RIGHT: DETAILS */}
+                  <div className="showcase-right">
+                     <div className="breadcrumb">
+                        HOME / SHOP / {product?.category?.name?.toUpperCase()}
+                     </div>
 
-                  <div className="prod-meta">
-                     <span className="category-tag">
-                        <Tag size={16} /> {product?.category?.name}
-                     </span>
-                     <span
-                        className="stock-tag"
-                        style={{
-                           background: product?.quantity === 0 ? "#ef4444" : "#4ade80",
-                           color: "black",
-                        }}
-                     >
-                        <Package size={16} />
-                        {product?.quantity === 0 ? "OUT OF STOCK" : "IN STOCK"}
-                     </span>
-                  </div>
+                     <h1 className="prod-title">{product?.name}</h1>
 
-                  <div className="prod-price">{product?.price}</div>
-
-                  <p className="prod-desc">{product?.description}</p>
-
-                  <div className="action-area">
-                     <button
-                        className="btn-add-cart"
-                        disabled={product?.quantity === 0}
-                        onClick={handleAddToCart}
-                        style={{
-                           opacity: product?.quantity === 0 ? 0.6 : 1,
-                           cursor: product?.quantity === 0 ? "not-allowed" : "pointer",
-                           background: product?.quantity === 0 ? "#999" : "black",
-                        }}
-                     >
-                        {product?.quantity === 0 ? (
-                           "OUT OF STOCK"
-                        ) : (
-                           <>
-                              ADD TO CART <ShoppingCart size={20} />
-                           </>
-                        )}
-                     </button>
-                  </div>
-
-                  {/* Decorative Features Box */}
-                  <div className="features-box">
-                     <div className="feat-item"><Star size={14} fill="black" /> Authentic Quality</div>
-                     <div className="feat-item"><Star size={14} fill="black" /> Secure Payment</div>
-                     <div className="feat-item"><Star size={14} fill="black" /> Fast Shipping</div>
-                  </div>
-               </div>
-            </div>
-
-            {/* --- SIMILAR PRODUCTS --- */}
-            <div className="related-section">
-               <h3 className="section-title">YOU MIGHT ALSO LIKE</h3>
-
-               {relatedProducts.length < 1 ? (
-                  <p style={{ fontFamily: 'Space Grotesk', color: '#666' }}>No similar products found.</p>
-               ) : (
-                  <div className="related-grid">
-                     {relatedProducts?.map((p) => (
-                        <div
-                           key={p._id}
-                           className="related-card"
-                           onClick={() => navigate(`/product/${p.slug}`)}
+                     <div className="prod-meta">
+                        <span className="category-tag">
+                           <Tag size={14} /> {product?.category?.name}
+                        </span>
+                        <span
+                           className="stock-tag"
+                           style={{
+                              background: product?.quantity === 0 ? "#fde8e8" : "#e8f5e9",
+                              color: product?.quantity === 0 ? "#ef4444" : "#2e7d32",
+                           }}
                         >
-                           <div className="related-img-box">
-                              <img
-                                 src={p?.photo ? `${import.meta.env.VITE_API_UPLOAD}${p.photo}` : "/placeholder.png"}
-                                 alt={p?.name}
-                                 className="related-img"
-                              />
-                           </div>
-                           <div className="related-info">
-                              <h4 className="related-name">{p.name}</h4>
-                              <div className="related-price">{p.price}</div>
-                              <button className="btn-view">VIEW <ArrowRight size={16} /></button>
-                           </div>
-                        </div>
-                     ))}
-                  </div>
-               )}
-            </div>
+                           <Package size={14} />
+                           {product?.quantity === 0 ? "OUT OF STOCK" : "IN STOCK"}
+                        </span>
+                     </div>
 
+                     <div className="prod-price">${product?.price}</div>
+
+                     <p className="prod-desc">{product?.description}</p>
+
+                     <div className="action-area">
+                        <button
+                           className="btn-add-cart"
+                           disabled={product?.quantity === 0}
+                           onClick={handleAddToCart}
+                           style={{
+                              opacity: product?.quantity === 0 ? 0.5 : 1,
+                              cursor: product?.quantity === 0 ? "not-allowed" : "pointer",
+                           }}
+                        >
+                           {product?.quantity === 0 ? (
+                              "OUT OF STOCK"
+                           ) : (
+                              <>
+                                 <ShoppingCart size={18} strokeWidth={2.5} /> Add to Cart
+                              </>
+                           )}
+                        </button>
+                     </div>
+
+                     {/* Decorative Features Box */}
+                     <div className="features-box">
+                        <div className="feat-item"><Star size={16} className="feat-icon" /> Authentic Quality</div>
+                        <div className="feat-item"><Star size={16} className="feat-icon" /> Secure Payment</div>
+                        <div className="feat-item"><Star size={16} className="feat-icon" /> Fast Shipping</div>
+                     </div>
+                  </div>
+               </div>
+
+               {/* --- SIMILAR PRODUCTS --- */}
+               <div className="related-section">
+                  <h3 className="section-title">You Might Also Like</h3>
+
+                  {relatedProducts.length < 1 ? (
+                     <p className="empty-related">No similar products found.</p>
+                  ) : (
+                     <div className="related-grid">
+                        {relatedProducts?.map((p) => (
+                           <div
+                              key={p._id}
+                              className="related-card"
+                              onClick={() => navigate(`/product/${p.slug}`)}
+                           >
+                              <div className="related-img-box">
+                                 <img
+                                    src={p?.photo ? `${import.meta.env.VITE_API_UPLOAD}${p.photo}` : "/placeholder.png"}
+                                    alt={p?.name}
+                                    className="related-img"
+                                 />
+                              </div>
+                              <div className="related-info">
+                                 <h4 className="related-name">{p.name}</h4>
+                                 <div className="related-price">${p.price}</div>
+                                 <button className="btn-view">View Details <ArrowRight size={14} /></button>
+                              </div>
+                           </div>
+                        ))}
+                     </div>
+                  )}
+               </div>
+
+            </div>
          </div>
 
          <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
         :root {
-           --black: #000000;
-           --white: #ffffff;
-           --yellow: #ffdb4d;
-           --purple: #a855f7;
-           --green: #4ade80;
-           --border: 2.5px solid var(--black);
-           --shadow-hard: 6px 6px 0px var(--black);
-           --shadow-hover: 3px 3px 0px var(--black);
-           --font: 'Space Grotesk', sans-serif;
+           --color-yellow: #FFB300;
+           --color-dark: #222222;
+           --color-border: #eaeaea;
+           --color-muted: #888888;
+           --color-bg-page: #f8f9fa;
+           --font-main: 'Poppins', sans-serif;
+        }
+
+        .pop-page-background {
+           background-color: var(--color-bg-page);
+           min-height: 90vh;
+           padding: 50px 0;
+           font-family: var(--font-main);
         }
 
         .pop-container {
            max-width: 1200px;
-           margin: 40px auto;
+           margin: 0 auto;
            padding: 0 20px;
-           font-family: var(--font);
         }
 
-        /* --- PRODUCT SHOWCASE (Grid Layout) --- */
+        /* --- PRODUCT SHOWCASE (Main Card) --- */
         .product-showcase {
            display: grid;
            grid-template-columns: 1fr 1fr;
            gap: 50px;
-           margin-bottom: 80px;
+           margin-bottom: 60px;
            align-items: start;
+           background: #ffffff;
+           border-radius: 20px;
+           padding: 40px;
+           border: 1px solid var(--color-border);
+           box-shadow: 0 10px 30px rgba(0,0,0,0.02);
         }
 
         /* LEFT IMAGE */
         .main-img-box {
-           background: var(--white);
-           border: var(--border);
-           box-shadow: var(--shadow-hard);
+           background: #f8f9fa;
+           border-radius: 16px;
            height: 500px;
            display: flex;
            align-items: center;
            justify-content: center;
            position: relative;
-           background-image: radial-gradient(#000 1px, transparent 1px);
-           background-size: 20px 20px; /* Dot pattern background */
+           padding: 30px;
         }
 
         .main-img {
-           max-width: 90%;
-           max-height: 90%;
+           max-width: 100%;
+           max-height: 100%;
            object-fit: contain;
-           mix-blend-mode: multiply; /* Blends nicely with the dots */
-           z-index: 2;
+           transition: transform 0.3s ease;
+        }
+        .main-img-box:hover .main-img {
+           transform: scale(1.05);
         }
 
         .sticker-badge {
            position: absolute;
-           top: -15px;
-           left: -15px;
-           background: var(--yellow);
-           color: var(--black);
-           border: var(--border);
-           padding: 5px 15px;
-           font-weight: 800;
-           transform: rotate(-5deg);
-           box-shadow: 3px 3px 0px var(--black);
+           top: 20px;
+           left: 20px;
+           background: var(--color-yellow);
+           color: var(--color-dark);
+           padding: 6px 14px;
+           font-weight: 600;
+           font-size: 0.8rem;
+           border-radius: 20px;
            z-index: 3;
+           letter-spacing: 0.5px;
         }
 
         /* RIGHT DETAILS */
         .showcase-right {
            padding-top: 10px;
+           display: flex;
+           flex-direction: column;
+           height: 100%;
         }
 
         .breadcrumb {
            font-size: 0.85rem;
-           color: #666;
-           font-weight: 700;
+           color: var(--color-muted);
+           font-weight: 500;
            margin-bottom: 15px;
-           letter-spacing: 1px;
+           letter-spacing: 0.5px;
         }
 
         .prod-title {
-           font-size: 3rem;
-           font-weight: 800;
-           line-height: 1;
+           font-size: 2.2rem;
+           font-weight: 600;
+           line-height: 1.2;
            margin-bottom: 20px;
-           text-transform: uppercase;
-           text-shadow: 2px 2px 0px #eee;
+           color: var(--color-dark);
+           letter-spacing: -0.5px;
         }
 
         .prod-meta {
            display: flex;
-           gap: 15px;
+           gap: 12px;
            margin-bottom: 25px;
+           flex-wrap: wrap;
         }
 
         .category-tag, .stock-tag {
            display: flex;
            align-items: center;
            gap: 6px;
-           font-weight: 700;
-           font-size: 0.9rem;
-           border: 2px solid var(--black);
-           padding: 4px 12px;
+           font-weight: 500;
+           font-size: 0.85rem;
+           padding: 6px 14px;
+           border-radius: 20px;
         }
-        .category-tag { background: #eee; }
-        .stock-tag { background: var(--green); }
+        .category-tag { background: #f0f0f0; color: var(--color-dark); }
+        .stock-tag { font-weight: 600; }
 
         .prod-price {
-           font-size: 2.5rem;
-           font-weight: 800;
-           color: var(--purple);
-           margin-bottom: 25px;
-           display: inline-block;
-           border-bottom: 4px solid var(--yellow);
+           font-size: 2rem;
+           font-weight: 600;
+           color: var(--color-dark);
+           margin-bottom: 20px;
         }
 
         .prod-desc {
-           font-size: 1.1rem;
+           font-size: 0.95rem;
            line-height: 1.6;
-           color: #333;
-           margin-bottom: 30px;
-           border-left: 4px solid var(--black);
-           padding-left: 20px;
+           color: var(--color-muted);
+           margin-bottom: 35px;
+        }
+
+        .action-area {
+           margin-top: auto;
         }
 
         .btn-add-cart {
-           background: var(--black);
-           color: var(--white);
+           background: var(--color-dark);
+           color: #ffffff;
            width: 100%;
-           padding: 18px;
-           font-size: 1.2rem;
-           font-weight: 800;
-           border: var(--border);
-           cursor: pointer;
+           padding: 16px;
+           font-size: 1rem;
+           font-weight: 600;
+           border: none;
+           border-radius: 12px;
            display: flex;
            align-items: center;
            justify-content: center;
-           gap: 12px;
-           box-shadow: var(--shadow-hard);
-           transition: 0.2s;
+           gap: 10px;
+           transition: all 0.2s ease;
+           font-family: var(--font-main);
         }
-        .btn-add-cart:hover {
-           background: var(--purple);
-           transform: translate(-4px, -4px);
-           box-shadow: 8px 8px 0px var(--black);
-        }
-        .btn-add-cart:active {
-           transform: translate(2px, 2px);
-           box-shadow: 2px 2px 0px var(--black);
+        .btn-add-cart:hover:not(:disabled) {
+           background: var(--color-yellow);
+           color: var(--color-dark);
+           transform: translateY(-2px);
+           box-shadow: 0 10px 20px rgba(0,0,0,0.08);
         }
 
         .features-box {
-           margin-top: 30px;
+           margin-top: 35px;
            display: flex;
            justify-content: space-between;
-           border-top: 2px dashed #ccc;
-           padding-top: 20px;
+           border-top: 1px solid var(--color-border);
+           padding-top: 25px;
         }
         .feat-item {
            font-size: 0.85rem;
-           font-weight: 600;
-           display: flex; align-items: center; gap: 5px;
+           font-weight: 500;
+           color: var(--color-muted);
+           display: flex; 
+           align-items: center; 
+           gap: 6px;
+        }
+        .feat-icon {
+           color: var(--color-yellow);
+           fill: var(--color-yellow);
         }
 
         /* --- RELATED PRODUCTS --- */
         .section-title {
-           font-size: 1.8rem;
-           font-weight: 800;
-           border-bottom: var(--border);
-           padding-bottom: 10px;
+           font-size: 1.6rem;
+           font-weight: 600;
+           color: var(--color-dark);
            margin-bottom: 30px;
-           display: inline-block;
-           background: var(--yellow);
-           padding: 5px 15px;
-           box-shadow: 4px 4px 0px var(--black);
+        }
+
+        .empty-related {
+           color: var(--color-muted);
+           font-size: 0.95rem;
         }
 
         .related-grid {
            display: grid;
-           grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-           gap: 30px;
+           grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+           gap: 25px;
         }
 
         .related-card {
-           border: var(--border);
-           background: var(--white);
-           padding: 10px;
+           background: #ffffff;
+           border: 1px solid var(--color-border);
+           border-radius: 12px;
+           padding: 20px;
            cursor: pointer;
-           transition: 0.2s;
+           transition: all 0.2s ease;
            display: flex; 
            flex-direction: column;
         }
         .related-card:hover {
-           transform: translate(-4px, -4px);
-           box-shadow: var(--shadow-hard);
-           border-color: var(--purple);
+           transform: translateY(-4px);
+           box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+           border-color: var(--color-yellow);
         }
 
         .related-img-box {
            height: 180px;
-           background: #fff;
-           border-bottom: var(--border);
+           background: #f8f9fa;
+           border-radius: 8px;
            display: flex; 
            align-items: center; 
            justify-content: center;
-           margin-bottom: 10px;
+           margin-bottom: 15px;
+           padding: 15px;
         }
         .related-img {
-           max-width: 80%; max-height: 80%; object-fit: contain;
+           max-width: 100%; 
+           max-height: 100%; 
+           object-fit: contain;
+           transition: transform 0.3s ease;
+        }
+        .related-card:hover .related-img {
+           transform: scale(1.05);
         }
 
         .related-name {
-           font-weight: 700;
+           font-weight: 600;
            font-size: 1rem;
-           margin-bottom: 5px;
+           color: var(--color-dark);
+           margin-bottom: 6px;
            white-space: nowrap; 
            overflow: hidden; 
            text-overflow: ellipsis;
         }
 
         .related-price {
-           font-weight: 800;
-           color: var(--black);
-           margin-bottom: 10px;
-           background: var(--yellow);
-           display: inline-block;
-           padding: 2px 5px;
+           font-weight: 600;
+           color: var(--color-dark);
+           margin-bottom: 15px;
+           font-size: 1.05rem;
         }
 
         .btn-view {
            width: 100%;
            background: transparent;
-           border: 2px solid var(--black);
-           padding: 8px;
-           font-weight: 700;
+           border: 1px solid var(--color-border);
+           border-radius: 8px;
+           padding: 10px;
+           font-weight: 500;
+           font-size: 0.9rem;
            cursor: pointer;
-           display: flex; align-items: center; justify-content: center; gap: 5px;
-           font-size: 0.8rem;
+           display: flex; 
+           align-items: center; 
+           justify-content: center; 
+           gap: 6px;
+           color: var(--color-dark);
+           transition: all 0.2s ease;
+           font-family: var(--font-main);
         }
         .related-card:hover .btn-view {
-           background: var(--black);
-           color: var(--white);
+           background: var(--color-dark);
+           color: #ffffff;
+           border-color: var(--color-dark);
         }
 
         /* RESPONSIVE */
         @media (max-width: 900px) {
-           .product-showcase { grid-template-columns: 1fr; gap: 30px; }
+           .product-showcase { grid-template-columns: 1fr; gap: 30px; padding: 25px; }
            .main-img-box { height: 350px; }
-           .prod-title { font-size: 2.2rem; }
+           .prod-title { font-size: 1.8rem; }
+           .features-box { flex-direction: column; gap: 10px; }
         }
       `}</style>
       </Layout>

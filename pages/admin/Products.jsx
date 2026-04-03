@@ -31,10 +31,12 @@ const Products = () => {
           {/* HEADER */}
           <div className="dashboard-header">
              <div className="header-title-box">
-                <Package size={28} strokeWidth={2.5} />
-                <h1>ALL PRODUCTS</h1>
+                <div className="title-icon">
+                  <Package size={28} strokeWidth={2.5} />
+                </div>
+                <h1>All Products</h1>
              </div>
-             <p>Manage and update your inventory list.</p>
+             <p className="subtitle">Manage and update your inventory list.</p>
           </div>
 
           <div className="dashboard-grid">
@@ -68,9 +70,10 @@ const Products = () => {
                           <p className="prod-desc">{p.description.substring(0, 45)}...</p>
                           
                           <div className="prod-meta">
-                             <span className="prod-price">₹ {p.price}</span>
+                             <span className="prod-price">${p.price}</span>
+                             {/* Yellow button injected directly into the default state */}
                              <span className="prod-action">
-                                EDIT <ArrowRight size={14} />
+                                Edit <ArrowRight size={14} />
                              </span>
                           </div>
                        </div>
@@ -85,148 +88,160 @@ const Products = () => {
       </div>
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
         :root {
-          --black: #000000;
-          --white: #ffffff;
-          --off-white: #fdfbf7;
-          --yellow: #ffdb4d;
-          --purple: #a855f7;
-          --green: #4ade80;
-          --border: 2.5px solid var(--black);
-          --shadow: 5px 5px 0px var(--black);
-          --shadow-hover: 8px 8px 0px var(--black);
-          --font: 'Space Grotesk', sans-serif;
+          --color-yellow: #FFB300;
+          --color-yellow-light: rgba(255, 179, 0, 0.08); /* Soft yellow for backgrounds */
+          --color-dark: #222222;
+          --color-border: #eaeaea;
+          --color-muted: #888888;
+          --color-bg-page: #f8f9fa;
+          --font-main: 'Poppins', sans-serif;
         }
 
         .pop-page-background {
-          background-color: var(--off-white);
-          background-image: radial-gradient(var(--black) 1.5px, transparent 1.5px);
-          background-size: 24px 24px;
+          background-color: var(--color-bg-page);
           min-height: 90vh;
           padding: 40px 0;
-          font-family: var(--font);
+          font-family: var(--font-main);
         }
 
         .pop-container {
-          max-width: 1200px;
+          max-width: 1300px;
           margin: 0 auto;
-          padding: 0 20px;
+          padding: 0 40px;
         }
 
-        /* HEADER */
+        /* --- HEADER --- */
         .dashboard-header {
            margin-bottom: 40px;
-           text-align: center;
            display: flex;
            flex-direction: column;
-           align-items: center;
+           align-items: flex-start;
         }
 
         .header-title-box {
-           background: var(--white);
-           border: var(--border);
-           padding: 10px 25px;
-           display: inline-flex;
+           display: flex;
            align-items: center;
            gap: 15px;
-           box-shadow: 4px 4px 0px var(--black);
-           transform: rotate(-1deg);
-           margin-bottom: 10px;
+           margin-bottom: 8px;
+        }
+
+        .title-icon {
+           background: var(--color-yellow);
+           color: var(--color-dark);
+           width: 48px;
+           height: 48px;
+           border-radius: 12px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
         }
 
         .header-title-box h1 {
            font-size: 2rem;
-           font-weight: 800;
+           font-weight: 600;
            margin: 0;
-           letter-spacing: -1px;
+           color: var(--color-dark);
+           letter-spacing: -0.5px;
         }
 
-        /* LAYOUT GRID */
+        .subtitle {
+           font-size: 1rem;
+           color: var(--color-muted);
+           margin: 0;
+           font-weight: 400;
+        }
+
+        /* --- LAYOUT GRID --- */
         .dashboard-grid {
            display: grid;
            grid-template-columns: 280px 1fr;
-           gap: 40px;
+           gap: 30px;
            align-items: start;
         }
 
-        /* PRODUCT GRID */
+        /* --- PRODUCT GRID --- */
         .admin-product-grid {
            display: grid;
-           grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+           grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
            gap: 25px;
         }
 
-        /* PRODUCT CARD */
+        /* --- PRODUCT CARD --- */
         @keyframes slideUp {
             from { transform: translateY(30px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
 
         .admin-prod-card {
-           background: var(--white);
-           border: var(--border);
+           background: #ffffff;
+           border: 1px solid var(--color-border);
+           border-radius: 16px;
            text-decoration: none;
-           color: var(--black);
+           color: var(--color-dark);
            display: flex;
            flex-direction: column;
-           box-shadow: var(--shadow);
-           transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-           position: relative;
+           box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+           transition: all 0.3s ease;
            opacity: 0;
            animation: slideUp 0.5s ease forwards;
+           overflow: hidden;
         }
 
         .admin-prod-card:hover {
-           transform: translate(-4px, -4px);
-           box-shadow: var(--shadow-hover);
-           border-color: var(--purple);
+           transform: translateY(-5px);
+           box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+           border-color: var(--color-yellow);
         }
 
         .prod-img-box {
            height: 200px;
-           border-bottom: var(--border);
+           background: var(--color-yellow-light); /* Soft yellow tint applied to image background permanently */
+           border-bottom: 1px solid var(--color-border);
            display: flex;
            align-items: center;
            justify-content: center;
-           padding: 10px;
-           background: #fff;
+           padding: 20px;
            overflow: hidden;
         }
 
         .prod-img {
-           max-width: 90%;
-           max-height: 90%;
+           max-width: 100%;
+           max-height: 100%;
            object-fit: contain;
-           transition: transform 0.3s;
+           transition: transform 0.3s ease;
+           mix-blend-mode: multiply; /* Blends image naturally with the yellow tint */
         }
         
         .admin-prod-card:hover .prod-img {
-           transform: scale(1.1);
+           transform: scale(1.08);
         }
 
         .prod-details {
-           padding: 15px;
+           padding: 20px;
            flex: 1;
            display: flex;
            flex-direction: column;
         }
 
         .prod-name {
-           font-weight: 800;
+           font-weight: 600;
            font-size: 1.1rem;
-           margin-bottom: 5px;
+           margin-bottom: 6px;
            white-space: nowrap;
            overflow: hidden;
            text-overflow: ellipsis;
+           color: var(--color-dark);
         }
 
         .prod-desc {
            font-size: 0.85rem;
-           color: #555;
+           color: var(--color-muted);
            margin-bottom: 15px;
-           font-weight: 500;
+           font-weight: 400;
+           line-height: 1.4;
         }
 
         .prod-meta {
@@ -237,30 +252,35 @@ const Products = () => {
         }
 
         .prod-price {
-           font-weight: 800;
-           background: var(--yellow);
-           padding: 2px 8px;
-           border: 1px solid var(--black);
-           box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+           font-weight: 600;
+           font-size: 1.1rem;
+           color: var(--color-dark);
         }
 
+        /* Yellow theme color applied to the button natively */
         .prod-action {
-           font-size: 0.75rem;
-           font-weight: 700;
+           background: var(--color-yellow);
+           color: var(--color-dark);
+           font-size: 0.85rem;
+           font-weight: 500;
            display: flex;
            align-items: center;
-           gap: 4px;
-           border-bottom: 2px solid transparent;
+           gap: 6px;
+           padding: 6px 14px;
+           border-radius: 20px;
+           transition: all 0.2s ease;
         }
         
         .admin-prod-card:hover .prod-action {
-           border-color: var(--black);
+           background: var(--color-dark);
+           color: #ffffff;
         }
 
-        /* RESPONSIVE */
+        /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
            .dashboard-grid { grid-template-columns: 1fr; }
-           .admin-product-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+           .admin-product-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+           .pop-container { padding: 0 20px; }
         }
       `}</style>
     </Layout>

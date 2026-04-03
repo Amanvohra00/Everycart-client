@@ -90,10 +90,12 @@ const CreateCategory = () => {
           {/* HEADER */}
           <div className="dashboard-header">
              <div className="header-title-box">
-                <LayoutList size={28} strokeWidth={2.5} />
-                <h1>MANAGE CATEGORIES</h1>
+                <div className="title-icon">
+                  <LayoutList size={28} strokeWidth={2.5} />
+                </div>
+                <h1>Manage Categories</h1>
              </div>
-             <p>Create, update, and remove product categories.</p>
+             <p className="subtitle">Create, update, and remove product categories.</p>
           </div>
 
           <div className="dashboard-grid">
@@ -111,7 +113,7 @@ const CreateCategory = () => {
                  {/* CREATE SECTION */}
                  <div className="card-section create-section">
                     <h3 className="section-title">
-                       <PlusCircle size={20} strokeWidth={2.5} /> ADD NEW CATEGORY
+                       <PlusCircle size={20} strokeWidth={2.5} className="text-yellow" /> Add New Category
                     </h3>
                     <div className="form-wrapper">
                        <CategoryForm
@@ -124,14 +126,14 @@ const CreateCategory = () => {
 
                  {/* TABLE SECTION */}
                  <div className="card-section table-section">
-                    <h3 className="section-title">EXISTING CATEGORIES</h3>
+                    <h3 className="section-title">Existing Categories</h3>
                     
                     <div className="custom-table-container">
                        <table className="pop-table">
                           <thead>
                              <tr>
-                                <th>CATEGORY NAME</th>
-                                <th className="action-col">ACTIONS</th>
+                                <th>Category Name</th>
+                                <th className="action-col">Actions</th>
                              </tr>
                           </thead>
                           <tbody>
@@ -139,23 +141,25 @@ const CreateCategory = () => {
                                 <tr key={c._id}>
                                    <td>{c.name}</td>
                                    <td className="action-col">
-                                      <button 
-                                        className="btn-action edit"
-                                        onClick={() => {
-                                          setVisible(true);
-                                          setUpdatedName(c.name);
-                                          setSelected(c);
-                                        }}
-                                      >
-                                        <Edit size={16} /> EDIT
-                                      </button>
-                                      
-                                      <button 
-                                        className="btn-action delete"
-                                        onClick={() => handleDelete(c._id)}
-                                      >
-                                        <Trash2 size={16} /> DELETE
-                                      </button>
+                                      <div className="action-buttons">
+                                        <button 
+                                          className="btn-action edit"
+                                          onClick={() => {
+                                            setVisible(true);
+                                            setUpdatedName(c.name);
+                                            setSelected(c);
+                                          }}
+                                        >
+                                          <Edit size={16} /> Edit
+                                        </button>
+                                        
+                                        <button 
+                                          className="btn-action delete"
+                                          onClick={() => handleDelete(c._id)}
+                                        >
+                                          <Trash2 size={16} /> Delete
+                                        </button>
+                                      </div>
                                    </td>
                                 </tr>
                              ))}
@@ -171,10 +175,11 @@ const CreateCategory = () => {
 
           {/* ANT DESIGN MODAL */}
           <Modal
-            title={<span style={{ fontWeight: 800, textTransform: 'uppercase', fontFamily: 'Space Grotesk' }}>Update Category</span>}
+            title={<span style={{ fontWeight: 600, fontFamily: 'Poppins' }}>Update Category</span>}
             open={visible}
             footer={null}
             onCancel={() => setVisible(false)}
+            centered
           >
             <div style={{ paddingTop: '20px' }}>
                <CategoryForm
@@ -189,99 +194,114 @@ const CreateCategory = () => {
       </div>
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
         :root {
-          --black: #000000;
-          --white: #ffffff;
-          --off-white: #fdfbf7;
-          --yellow: #ffdb4d;
-          --purple: #a855f7;
-          --green: #4ade80;
-          --red: #ef4444;
-          --border: 2.5px solid var(--black);
-          --shadow: 5px 5px 0px var(--black);
-          --font: 'Space Grotesk', sans-serif;
+          --color-yellow: #FFB300;
+          --color-dark: #222222;
+          --color-border: #eaeaea;
+          --color-muted: #888888;
+          --color-bg-page: #f8f9fa;
+          --font-main: 'Poppins', sans-serif;
         }
 
+        .text-yellow { color: var(--color-yellow); }
+
         .pop-page-background {
-          background-color: var(--off-white);
-          background-image: radial-gradient(var(--black) 1.5px, transparent 1.5px);
-          background-size: 24px 24px;
+          background-color: var(--color-bg-page);
           min-height: 90vh;
           padding: 40px 0;
-          font-family: var(--font);
+          font-family: var(--font-main);
         }
 
         .pop-container {
-          max-width: 1200px;
+          max-width: 1300px;
           margin: 0 auto;
-          padding: 0 20px;
+          padding: 0 40px;
         }
 
-        /* HEADER */
+        /* --- HEADER --- */
         .dashboard-header {
            margin-bottom: 40px;
-           text-align: center;
            display: flex;
            flex-direction: column;
-           align-items: center;
+           align-items: flex-start;
         }
 
         .header-title-box {
-           background: var(--white);
-           border: var(--border);
-           padding: 10px 25px;
-           display: inline-flex;
+           display: flex;
            align-items: center;
            gap: 15px;
-           box-shadow: 4px 4px 0px var(--black);
-           transform: rotate(-1deg);
-           margin-bottom: 10px;
+           margin-bottom: 8px;
+        }
+
+        .title-icon {
+           background: var(--color-yellow);
+           color: var(--color-dark);
+           width: 48px;
+           height: 48px;
+           border-radius: 12px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
         }
 
         .header-title-box h1 {
            font-size: 2rem;
-           font-weight: 800;
+           font-weight: 600;
            margin: 0;
-           letter-spacing: -1px;
+           color: var(--color-dark);
+           letter-spacing: -0.5px;
         }
 
-        /* GRID */
+        .subtitle {
+           font-size: 1rem;
+           color: var(--color-muted);
+           margin: 0;
+           font-weight: 400;
+        }
+
+        /* --- GRID --- */
         .dashboard-grid {
            display: grid;
            grid-template-columns: 280px 1fr;
-           gap: 40px;
+           gap: 30px;
            align-items: start;
         }
 
-        /* ADMIN CARD */
+        /* --- ADMIN CARD --- */
         .admin-card {
-           background: var(--white);
-           border: var(--border);
-           box-shadow: var(--shadow);
+           background: #ffffff;
+           border: 1px solid var(--color-border);
+           border-radius: 16px;
+           box-shadow: 0 4px 20px rgba(0,0,0,0.02);
            overflow: hidden;
         }
 
         .card-section {
-           padding: 30px;
+           padding: 35px 40px;
         }
         
         .create-section {
-           background: var(--off-white);
-           border-bottom: var(--border);
+           background: #fcfcfc;
+           border-bottom: 1px solid var(--color-border);
         }
 
         .section-title {
-           font-weight: 800;
+           font-weight: 600;
            font-size: 1.2rem;
-           margin-bottom: 20px;
-           display: flex; align-items: center; gap: 10px;
+           color: var(--color-dark);
+           margin-bottom: 25px;
+           display: flex; 
+           align-items: center; 
+           gap: 10px;
         }
 
-        /* TABLE STYLES */
+        /* --- TABLE STYLES --- */
         .custom-table-container {
            overflow-x: auto;
+           border: 1px solid var(--color-border);
+           border-radius: 12px;
         }
 
         .pop-table {
@@ -291,54 +311,83 @@ const CreateCategory = () => {
         }
 
         .pop-table th {
-           background: var(--black);
-           color: var(--white);
-           padding: 15px;
+           background: #f8f9fa;
+           color: var(--color-dark);
+           padding: 16px 20px;
            text-align: left;
-           font-weight: 700;
-           letter-spacing: 1px;
+           font-weight: 600;
+           border-bottom: 1px solid var(--color-border);
         }
 
         .pop-table td {
-           border-bottom: 2px solid #eee;
-           padding: 15px;
-           font-weight: 600;
+           border-bottom: 1px solid var(--color-border);
+           padding: 16px 20px;
+           font-weight: 500;
+           color: var(--color-dark);
+           vertical-align: middle;
+        }
+
+        .pop-table tr:last-child td {
+           border-bottom: none;
         }
 
         .pop-table tr:hover td {
-           background: #fafafa;
+           background: #fcfcfc;
         }
 
         .action-col {
            text-align: right;
+        }
+
+        .action-buttons {
            display: flex;
            gap: 10px;
            justify-content: flex-end;
         }
 
-        /* ACTION BUTTONS */
+        /* --- ACTION BUTTONS --- */
         .btn-action {
-           border: 2px solid var(--black);
-           padding: 6px 12px;
-           font-weight: 700;
-           font-size: 0.8rem;
+           border: none;
+           padding: 8px 16px;
+           font-weight: 500;
+           font-size: 0.85rem;
+           border-radius: 8px;
            cursor: pointer;
-           display: flex; align-items: center; gap: 5px;
-           box-shadow: 2px 2px 0px rgba(0,0,0,0.1);
-           transition: 0.2s;
+           display: flex; 
+           align-items: center; 
+           gap: 6px;
+           transition: all 0.2s ease;
+           font-family: var(--font-main);
         }
         
         .btn-action:hover {
-           transform: translate(-2px, -2px);
-           box-shadow: 4px 4px 0px var(--black);
+           transform: translateY(-2px);
+           box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
-        .edit { background: var(--yellow); color: var(--black); }
-        .delete { background: var(--red); color: var(--white); border-color: var(--black); }
+        .edit { 
+           background: #f0f4f8; 
+           color: #0d6efd; 
+        }
+        .edit:hover {
+           background: #0d6efd;
+           color: #fff;
+        }
 
-        /* RESPONSIVE */
+        .delete { 
+           background: #fef0f0; 
+           color: #ef4444; 
+        }
+        .delete:hover {
+           background: #ef4444;
+           color: #fff;
+        }
+
+        /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
            .dashboard-grid { grid-template-columns: 1fr; }
+           .pop-container { padding: 0 20px; }
+           .card-section { padding: 25px 20px; }
         }
       `}</style>
     </Layout>

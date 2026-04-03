@@ -16,23 +16,25 @@ const Search = () => {
           {/* HEADER SECTION */}
           <div className="page-header">
              <div className="title-box">
-               <SearchIcon size={28} strokeWidth={3} />
-               <h1 className="page-title">SEARCH RESULTS</h1>
+               <div className="title-icon">
+                 <SearchIcon size={28} strokeWidth={2.5} />
+               </div>
+               <h1 className="page-title">Search Results</h1>
              </div>
              
              <div className="result-badge">
                {values?.results.length < 1 
-                 ? "NO MATCHES FOUND" 
-                 : `${values?.results.length} ITEMS FOUND`}
+                 ? "No matches found" 
+                 : `${values?.results.length} items found`}
              </div>
           </div>
 
           {/* CONTENT SECTION */}
           {values?.results.length < 1 ? (
              <div className="empty-state">
-                <Frown size={48} strokeWidth={2} style={{marginBottom: '15px'}}/>
+                <Frown size={48} strokeWidth={2} style={{marginBottom: '15px', color: '#888'}}/>
                 <p>We couldn't find any products matching your search.</p>
-                <Link to="/" className="btn-back">GO BACK HOME</Link>
+                <Link to="/" className="btn-back">Go Back Home</Link>
              </div>
           ) : (
              /* PRODUCT GRID */
@@ -40,33 +42,36 @@ const Search = () => {
                {values?.results.map((p, index) => (
                  <div 
                     key={p._id} 
-                    className="pop-card"
+                    className="product-card"
                     style={{ animationDelay: `${index * 0.05}s` }}
                  >
-                    <div className="pop-img-box">
+                    <div className="product-img-wrap">
                        <img
                           src={`${import.meta.env.VITE_API_UPLOAD}${p.photo}`}
                           alt={p.name}
-                          className="pop-img"
+                          className="product-img"
                        />
                     </div>
 
-                    <div className="pop-info">
-                       <div className="pop-name" title={p.name}>{p.name}</div>
-                       <div className="pop-desc">{p.description.substring(0, 45)}...</div>
-                       <div className="pop-price">{p.price}</div>
+                    <div className="product-info">
+                       <div className="product-header">
+                          <div className="product-name" title={p.name}>{p.name}</div>
+                          <div className="product-price">${p.price}</div>
+                       </div>
                        
-                       <div className="pop-actions">
+                       <div className="product-desc">{p.description.substring(0, 45)}...</div>
+                       
+                       <div className="product-actions">
                           <Link 
                              to={`/product/${p.slug}`} 
-                             className="btn-icon"
+                             className="btn-view"
                              title="View Details"
                           >
-                             <Eye size={20} strokeWidth={2.5}/>
+                             <Eye size={18} strokeWidth={2.5}/>
                           </Link>
                           {/* Note: Add to Cart logic can be added here if needed, keeping visual style only for now */}
-                          <button className="btn-buy">
-                             <ShoppingCart size={18} strokeWidth={2.5}/> ADD
+                          <button className="btn-add-cart">
+                             <ShoppingCart size={16} strokeWidth={2.5}/> Add to Cart
                           </button>
                        </div>
                     </div>
@@ -79,77 +84,75 @@ const Search = () => {
       </div>
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
         :root {
-          --black: #000000;
-          --white: #ffffff;
-          --off-white: #fdfbf7;
-          --yellow: #ffdb4d;
-          --purple: #a855f7;
-          --green: #4ade80;
-          --border: 2.5px solid var(--black);
-          --shadow: 5px 5px 0px var(--black);
-          --shadow-hover: 8px 8px 0px var(--black);
-          --shadow-float: 10px 10px 0px var(--black);
-          --font: 'Space Grotesk', sans-serif;
+          --color-yellow: #FFB300;
+          --color-dark: #222222;
+          --color-border: #eaeaea;
+          --color-muted: #888888;
+          --color-bg-page: #f8f9fa;
+          --font-main: 'Poppins', sans-serif;
         }
 
         /* --- BACKGROUND --- */
         .pop-page-background {
-          background-color: var(--off-white);
-          background-image: radial-gradient(var(--black) 1.5px, transparent 1.5px);
-          background-size: 24px 24px;
+          background-color: var(--color-bg-page);
           min-height: 90vh;
-          padding: 60px 0;
-          border-top: var(--border);
-          font-family: var(--font);
+          padding: 50px 0;
+          font-family: var(--font-main);
         }
 
         .pop-container {
-          max-width: 1200px;
+          max-width: 1300px;
           margin: 0 auto;
-          padding: 0 20px;
+          padding: 0 40px;
         }
 
         /* --- HEADER --- */
         .page-header {
-          margin-bottom: 50px;
-          text-align: center;
+          margin-bottom: 40px;
           display: flex;
           flex-direction: column;
           align-items: center;
+          text-align: center;
         }
 
         .title-box {
-           background: var(--yellow);
-           border: var(--border);
-           padding: 12px 30px;
-           display: inline-flex;
+           display: flex;
            align-items: center;
-           gap: 12px;
-           box-shadow: var(--shadow);
-           margin-bottom: 20px;
-           transform: rotate(-1deg);
+           gap: 15px;
+           margin-bottom: 12px;
+        }
+
+        .title-icon {
+           background: var(--color-yellow);
+           color: var(--color-dark);
+           width: 54px;
+           height: 54px;
+           border-radius: 14px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
         }
 
         .page-title {
-          font-size: 2.5rem;
-          font-weight: 800;
-          text-transform: uppercase;
-          letter-spacing: -1px;
+          font-size: 2.2rem;
+          font-weight: 600;
           margin: 0;
-          color: var(--black);
+          color: var(--color-dark);
+          letter-spacing: -0.5px;
         }
 
         .result-badge {
-           font-weight: 700;
-           background: var(--white);
-           border: var(--border);
-           padding: 8px 20px;
+           font-weight: 500;
+           color: var(--color-muted);
+           background: #ffffff;
+           border: 1px solid var(--color-border);
+           border-radius: 20px;
+           padding: 6px 18px;
+           font-size: 0.9rem;
            display: inline-block;
-           text-transform: uppercase;
-           box-shadow: 3px 3px 0px rgba(0,0,0,0.1);
         }
 
         /* --- EMPTY STATE --- */
@@ -158,149 +161,177 @@ const Search = () => {
            flex-direction: column;
            align-items: center;
            justify-content: center;
-           background: var(--white);
-           border: var(--border);
-           padding: 60px;
+           background: #ffffff;
+           border: 1px solid var(--color-border);
+           border-radius: 16px;
+           padding: 60px 40px;
            text-align: center;
-           box-shadow: var(--shadow);
+           box-shadow: 0 4px 20px rgba(0,0,0,0.02);
            max-width: 500px;
            margin: 0 auto;
         }
         .empty-state p {
-           font-size: 1.2rem;
-           font-weight: 500;
-           margin-bottom: 20px;
+           font-size: 1.05rem;
+           font-weight: 400;
+           color: var(--color-muted);
+           margin-bottom: 25px;
         }
         .btn-back {
-           background: var(--black);
-           color: var(--white);
+           background: var(--color-dark);
+           color: #ffffff;
            text-decoration: none;
-           padding: 12px 25px;
-           font-weight: 700;
-           border: 2px solid var(--black);
-           transition: 0.2s;
+           padding: 12px 30px;
+           border-radius: 30px;
+           font-weight: 500;
+           transition: all 0.2s ease;
+           display: inline-block;
         }
         .btn-back:hover {
-           background: var(--white);
-           color: var(--black);
-           box-shadow: 4px 4px 0px var(--black);
-           transform: translate(-2px, -2px);
+           background: var(--color-yellow);
+           color: var(--color-dark);
+           transform: translateY(-2px);
+           box-shadow: 0 5px 15px rgba(255, 179, 0, 0.2);
         }
 
         /* --- GRID SYSTEM --- */
         .card-grid {
            display: grid;
-           grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+           grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
            gap: 30px;
         }
 
-        /* --- PRODUCT CARD --- */
+        /* --- PRODUCT CARD (Matches Home Page) --- */
         @keyframes slideUp {
-            from { transform: translateY(40px); opacity: 0; }
+            from { transform: translateY(30px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
 
-        .pop-card {
-           background: var(--white);
-           border: var(--border);
-           padding: 15px;
-           position: relative;
-           transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        .product-card {
+           background: #ffffff;
+           border-radius: 12px;
+           border: 1px solid var(--color-border);
+           transition: transform 0.2s, box-shadow 0.2s;
            display: flex;
            flex-direction: column;
            opacity: 0;
-           animation: slideUp 0.6s ease forwards;
+           animation: slideUp 0.5s ease forwards;
         }
-        .pop-card:hover {
-           box-shadow: var(--shadow-float);
-           transform: translate(-5px, -8px);
-           z-index: 10;
-           border-color: var(--purple);
+        .product-card:hover {
+           transform: translateY(-4px);
+           box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+           border-color: var(--color-yellow);
         }
 
-        .pop-img-box {
-           height: 200px;
-           border-bottom: var(--border);
-           margin: -15px -15px 15px -15px;
-           background: var(--white);
+        .product-img-wrap {
+           background: #f8f8f8;
+           border-radius: 12px 12px 0 0;
+           padding: 25px;
+           height: 220px;
            display: flex;
            align-items: center;
            justify-content: center;
-           overflow: hidden;
         }
-        .pop-img {
-           max-width: 80%; max-height: 80%; object-fit: contain;
-           mix-blend-mode: multiply;
+        .product-img {
+           max-width: 100%; 
+           max-height: 100%; 
+           object-fit: contain;
            transition: transform 0.3s;
         }
-        .pop-card:hover .pop-img { transform: scale(1.15) rotate(3deg); }
+        .product-card:hover .product-img { transform: scale(1.05); }
 
-        .pop-info { flex: 1; display: flex; flex-direction: column; }
+        .product-info { 
+           padding: 20px; 
+           display: flex; 
+           flex-direction: column; 
+           flex: 1; 
+        }
         
-        .pop-name { 
-           font-weight: 800; 
-           font-size: 1.1rem; 
-           margin-bottom: 5px; 
+        .product-header {
+           display: flex;
+           justify-content: space-between;
+           align-items: flex-start;
+           margin-bottom: 6px;
+        }
+
+        .product-name { 
+           font-weight: 600; 
+           font-size: 1.05rem; 
+           color: var(--color-dark);
+           line-height: 1.3;
            white-space: nowrap; 
            overflow: hidden; 
            text-overflow: ellipsis; 
         }
-        .pop-desc { font-size: 0.85rem; color: #555; margin-bottom: 15px; height: 38px; overflow: hidden; font-weight: 500;}
         
-        .pop-price { 
-           font-size: 1.2rem; 
-           font-weight: 800; 
-           background: var(--yellow); 
-           display: inline-block; 
-           padding: 4px 10px;
-           border: 2px solid var(--black);
-           margin-bottom: 15px;
-           align-self: flex-start;
-           box-shadow: 3px 3px 0px rgba(0,0,0,0.2);
-           transform: rotate(-2deg);
+        .product-price { 
+           font-weight: 600; 
+           font-size: 1.05rem;
+           color: var(--color-dark);
         }
 
-        .pop-actions { display: flex; gap: 10px; margin-top: auto; }
+        .product-desc { 
+           font-size: 0.85rem; 
+           color: var(--color-muted); 
+           margin-bottom: 15px; 
+           height: 40px; 
+           overflow: hidden; 
+        }
+
+        .product-actions { 
+           display: flex; 
+           gap: 10px; 
+           margin-top: auto; 
+        }
         
-        .btn-icon {
+        .btn-view {
+           border: 1px solid var(--color-border);
+           background: #ffffff;
+           color: var(--color-dark);
+           border-radius: 8px;
+           width: 44px;
+           height: 44px;
+           display: flex; 
+           align-items: center; 
+           justify-content: center;
+           cursor: pointer;
+           transition: all 0.2s;
+           flex-shrink: 0;
+           text-decoration: none;
+        }
+        .btn-view:hover { 
+           background: #f5f5f5; 
+           border-color: #dcdcdc;
+        }
+
+        .btn-add-cart {
            flex: 1;
-           border: 2px solid var(--black);
-           background: var(--white);
+           background: transparent;
+           color: var(--color-dark);
+           border: 1px solid var(--color-border);
+           border-radius: 8px;
            height: 44px;
-           display: flex; align-items: center; justify-content: center;
+           display: flex; 
+           align-items: center; 
+           justify-content: center; 
+           gap: 8px;
            cursor: pointer;
-           transition: 0.2s;
-           box-shadow: 2px 2px 0px var(--black);
-           color: var(--black);
+           font-weight: 500;
+           font-size: 0.9rem;
+           transition: all 0.2s;
+           font-family: var(--font-main);
         }
-        .btn-icon:hover { 
-           background: var(--green); 
-           transform: translate(-2px, -2px);
-           box-shadow: 4px 4px 0px var(--black);
+        .btn-add-cart:hover { 
+           background: var(--color-dark); 
+           color: #ffffff; 
+           border-color: var(--color-dark); 
         }
 
-        .btn-buy {
-           flex: 2;
-           background: var(--black);
-           color: var(--white);
-           border: 2px solid var(--black);
-           height: 44px;
-           display: flex; align-items: center; justify-content: center; gap: 8px;
-           cursor: pointer;
-           font-weight: 700;
-           transition: 0.2s;
-           box-shadow: 2px 2px 0px rgba(255,255,255,0.3);
-        }
-        .btn-buy:hover { 
-           background: var(--purple); 
-           border-color: var(--black); 
-           transform: translate(-2px, -2px);
-           box-shadow: 4px 4px 0px var(--black);
-        }
-
+        /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
+           .pop-container { padding: 0 20px; }
+           .pop-page-background { padding: 30px 0; }
            .page-title { font-size: 1.8rem; }
-           .pop-page-background { padding: 40px 0; background-size: 20px 20px; }
+           .title-icon { width: 45px; height: 45px; }
            .card-grid { grid-template-columns: 1fr; }
         }
       `}</style>

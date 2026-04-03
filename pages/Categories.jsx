@@ -16,8 +16,10 @@ const Categories = () => {
           {/* HEADER SECTION */}
           <div className="page-header">
              <div className="title-box">
-               <LayoutGrid size={32} strokeWidth={2.5} />
-               <h1 className="page-title">BROWSE CATEGORIES</h1>
+               <div className="title-icon">
+                 <LayoutGrid size={32} strokeWidth={2.5} />
+               </div>
+               <h1 className="page-title">Browse Categories</h1>
              </div>
              <p className="page-subtitle">Select a category to explore our exclusive collection.</p>
           </div>
@@ -33,7 +35,7 @@ const Categories = () => {
               >
                 <div className="card-content">
                   <span className="cat-name">{c.name}</span>
-                  <span className="cat-decor">collection</span>
+                  <span className="cat-decor">Collection</span>
                 </div>
                 <div className="icon-box">
                   <ArrowUpRight size={24} strokeWidth={2.5} />
@@ -46,92 +48,83 @@ const Categories = () => {
       </div>
 
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
         :root {
-          --black: #000000;
-          --white: #ffffff;
-          --off-white: #fdfbf7;
-          --yellow: #ffdb4d;
-          --purple: #a855f7;
-          --green: #4ade80;
-          --border: 2.5px solid var(--black);
-          --shadow: 5px 5px 0px var(--black);
-          --shadow-hover: 8px 8px 0px var(--black);
-          --font: 'Space Grotesk', sans-serif;
+          --color-yellow: #FFB300;
+          --color-dark: #222222;
+          --color-border: #eaeaea;
+          --color-muted: #888888;
+          --color-bg-page: #f8f9fa;
+          --font-main: 'Poppins', sans-serif;
         }
 
-        /* --- BACKGROUND DESIGN (Polka Dot Pattern) --- */
+        /* --- BACKGROUND DESIGN --- */
         .pop-page-background {
-          /* Warm Off-White Base */
-          background-color: var(--off-white);
-          
-          /* Polka Dot Pattern (Matches Home Page vibe) */
-          background-image: radial-gradient(var(--black) 1.5px, transparent 1.5px);
-          background-size: 24px 24px;
-          
+          background-color: var(--color-bg-page);
           min-height: 90vh;
           padding: 60px 0;
-          border-top: var(--border);
+          font-family: var(--font-main);
         }
 
         .pop-container {
-          max-width: 1200px;
+          max-width: 1300px;
           margin: 0 auto;
-          padding: 0 20px;
-          font-family: var(--font);
+          padding: 0 40px;
         }
 
         /* HEADER */
         .page-header {
-          margin-bottom: 60px;
-          text-align: center;
+          margin-bottom: 50px;
           display: flex;
           flex-direction: column;
           align-items: center;
+          text-align: center;
         }
 
         .title-box {
-           background: var(--yellow); /* Yellow highlight for title */
-           border: var(--border);
-           padding: 15px 30px;
-           display: inline-flex;
+           display: flex;
            align-items: center;
            gap: 15px;
-           box-shadow: var(--shadow);
-           margin-bottom: 20px;
-           transform: rotate(-1deg);
+           margin-bottom: 12px;
+        }
+
+        .title-icon {
+           background: var(--color-yellow);
+           color: var(--color-dark);
+           width: 60px;
+           height: 60px;
+           border-radius: 16px;
+           display: flex;
+           align-items: center;
+           justify-content: center;
         }
 
         .page-title {
-          font-size: 3rem;
-          font-weight: 800;
-          text-transform: uppercase;
-          letter-spacing: -1px;
+          font-size: 2.2rem;
+          font-weight: 600;
           margin: 0;
-          color: var(--black);
+          color: var(--color-dark);
+          letter-spacing: -0.5px;
         }
 
         .page-subtitle {
-          font-size: 1.1rem;
-          color: var(--black);
-          font-weight: 600;
-          background: var(--white);
-          display: inline-block;
-          padding: 8px 20px;
-          border: var(--border);
+          font-size: 1.05rem;
+          color: var(--color-muted);
+          font-weight: 400;
+          margin: 0;
         }
 
         /* GRID SYSTEM */
         .category-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-          gap: 35px;
+          grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+          gap: 25px;
         }
 
         /* ANIMATIONS */
         @keyframes slideUp {
-          from { transform: translateY(40px); opacity: 0; }
+          from { transform: translateY(30px); opacity: 0; }
           to { transform: translateY(0); opacity: 1; }
         }
 
@@ -140,71 +133,69 @@ const Categories = () => {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          background: var(--white);
-          border: var(--border);
-          padding: 30px;
+          background: #ffffff;
+          border: 1px solid var(--color-border);
+          border-radius: 16px;
+          padding: 30px 25px;
           text-decoration: none;
-          color: var(--black);
-          box-shadow: var(--shadow);
-          transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          transition: all 0.3s ease;
           position: relative;
           opacity: 0; 
-          animation: slideUp 0.6s ease forwards;
+          animation: slideUp 0.5s ease forwards;
         }
 
         .cat-card:hover {
-          transform: translate(-4px, -4px);
-          box-shadow: var(--shadow-hover);
-          background: var(--white); /* Keep white to pop against dots */
-          border-color: var(--purple); /* Purple border on hover */
+          transform: translateY(-5px);
+          box-shadow: 0 15px 35px rgba(0,0,0,0.04);
+          border-color: var(--color-yellow);
+        }
+
+        .card-content {
+          display: flex;
+          flex-direction: column;
         }
 
         .cat-name {
-          font-size: 1.8rem;
-          font-weight: 800;
-          text-transform: uppercase;
-          letter-spacing: -1px;
-          display: block;
-          line-height: 1;
+          font-size: 1.3rem;
+          font-weight: 600;
+          color: var(--color-dark);
+          margin-bottom: 4px;
+          line-height: 1.2;
         }
 
         .cat-decor {
-          font-size: 0.8rem;
-          color: #666;
-          font-weight: 600;
-          text-transform: uppercase;
-          letter-spacing: 2px;
-          margin-top: 5px;
-          display: block;
+          font-size: 0.9rem;
+          color: var(--color-muted);
+          font-weight: 400;
         }
 
         .icon-box {
-          border: 2px solid var(--black);
-          width: 55px;
-          height: 55px;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background: #f8f9fa;
+          color: var(--color-dark);
           display: flex;
           align-items: center;
           justify-content: center;
-          background: var(--yellow);
-          color: var(--black);
-          transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-          box-shadow: 2px 2px 0px rgba(0,0,0,1);
+          transition: all 0.3s ease;
         }
 
         /* Hover Interaction */
         .cat-card:hover .icon-box {
-          background: var(--black);
-          color: var(--white);
-          transform: rotate(90deg);
-          box-shadow: 4px 4px 0px var(--purple);
+          background: var(--color-yellow);
+          color: var(--color-dark);
+          transform: rotate(45deg);
         }
         
         /* RESPONSIVE */
         @media (max-width: 768px) {
-          .page-title { font-size: 2rem; }
-          .cat-card { padding: 20px; }
-          .cat-name { font-size: 1.4rem; }
-          .pop-page-background { background-size: 20px 20px; padding: 40px 0; }
+          .pop-container { padding: 0 20px; }
+          .page-title { font-size: 1.8rem; }
+          .title-icon { width: 50px; height: 50px; }
+          .cat-card { padding: 25px 20px; }
+          .cat-name { font-size: 1.2rem; }
+          .pop-page-background { padding: 40px 0; }
         }
       `}</style>
     </Layout>
